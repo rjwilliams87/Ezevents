@@ -1,0 +1,21 @@
+{
+  "name": "ezevents",
+  "version": "1.0.0",
+  "description": "a simple event planner and organizer",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "event",
+    "planning",
+    "event",
+    "planning"
+  ],
+  "author": "ryan j williams",
+  "license": "ISC"
+}

@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(morgan('common'));
 
 //routers
-const {router: eventRouter} = require('./events/router')
+const {router: eventRouter} = require('./events/router');
 //CORS
 app.use(function(req, res, next){
     res.header('Access-Control-Allow-Origin', '*');

@@ -1,12 +1,19 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 
 const {Events} = require('./models');
+const {jwtStrategy, localStrategy} = require('../auth');
 
-router.get('/', function(req, res){
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+const jwtAuth = passport.authenticate('jwt', {session: false});
+
+router.get('/', jwtAuth, function(req, res){
     Events
-    .find()
+    .find({user: req.user.username})
     .then(events=>{
         res.json(events.map(event => event.serialize()));
     })
@@ -16,8 +23,8 @@ router.get('/', function(req, res){
     })
 });
 
-router.get('/:id', function(req, res){
-    Events.findOne({_id: req.params.id})
+router.get('/:id', jwtAuth, function(req, res){
+    Events.findOne({_id: req.params.id, user: req.user.username})
     .then((event)=>{
         res.status(200).json(event.fullReport());
     }).catch(err => {
@@ -26,7 +33,7 @@ router.get('/:id', function(req, res){
     })
 })
 
-router.post('/', function(req, res){
+router.post('/', jwtAuth, function(req, res){
     const requiredFields = ['contact', 'date', 'time', 'order'];
     for (let i = 0; i < requiredFields.length; i++){
         const field = requiredFields[i];
@@ -37,6 +44,7 @@ router.post('/', function(req, res){
         }
     }
     Events.create({
+        user: req.user.username,
         contact: req.body.contact,
         date: req.body.date,
         time: req.body.time,
@@ -48,7 +56,7 @@ router.post('/', function(req, res){
     });
 });
 
-router.put('/:id', function(req, res){
+router.put('/:id', jwtAuth, function(req, res){
     if (!(req.params.id && req.body.id & req.params.id === req.body.id)){
         res.status(400).json({
             error: `Req path id and req body id must match`
@@ -71,7 +79,7 @@ router.put('/:id', function(req, res){
     })
 });
 
-router.delete('/:id', function(req, res){
+router.delete('/:id', jwtAuth, function(req, res){
     Events
     .findByIdAndRemove(req.params.id)
     .then(()=>{

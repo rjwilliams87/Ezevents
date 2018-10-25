@@ -15,6 +15,7 @@ app.use(morgan('common'));
 //routers
 const {router: eventRouter} = require('./events/router');
 const {router: userRouter} = require('./user')
+const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
 //CORS
 app.use(function(req, res, next){
     res.header('Access-Control-Allow-Origin', '*');
@@ -29,10 +30,14 @@ app.use(function(req, res, next){
 //endpoints
 app.use('/api/events', eventRouter);
 app.use('/api/users', userRouter);
+app.use('/api/auth', authRouter);
 app.use('/', express.static('public'));
 app.use('*', (req, res) =>{
     return res.status(404).json({message: `Not found`});
-})
+});
+
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 //set up server
 let server;

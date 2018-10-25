@@ -8,7 +8,7 @@ const UserSchema = mongoose.Schema({
     username: {type: String, require: true, unique: true},
     password: {type: String, require: true},
     firstName: {type: String, default: ''},
-    lastName: {type: String, default: ''}
+    lastName: {type: String, default: ''},
 });
 
 UserSchema.methods.serialize = function(){
@@ -19,7 +19,7 @@ UserSchema.methods.serialize = function(){
     };
 };
 
-UserSchema.methods.validatePassword = function(){
+UserSchema.methods.validatePassword = function(password){
     return bcrypt.compare(password, this.password);
 };
 

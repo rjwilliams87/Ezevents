@@ -10,6 +10,7 @@ const foodAndBevSchema = mongoose.Schema({
 });
 
 const eventSchema = mongoose.Schema({
+    user: {type: String},
     contact: {
         firstName: String, 
         lastName: String, 
@@ -46,7 +47,7 @@ eventSchema.methods.serialize = function(){
         id: this._id,
         contact: this.contactName, 
         date: this.date,
-        orderTotal: this.orderTotal
+        orderTotal: this.orderTotal,
     }
 }
 

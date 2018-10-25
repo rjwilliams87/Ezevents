@@ -82,7 +82,8 @@ router.post('/', jsonParser, (req, res) => {
     firstName = firstName.trim();
     lastName = lastName.trim();
 
-    return User.find({username}).count()
+    return User.find({username})
+    .count()
     .then((count)=>{
         if (count > 0) {
             return Promise.reject({

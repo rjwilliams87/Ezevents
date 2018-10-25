@@ -14,6 +14,7 @@ app.use(morgan('common'));
 
 //routers
 const {router: eventRouter} = require('./events/router');
+const {router: userRouter} = require('./user')
 //CORS
 app.use(function(req, res, next){
     res.header('Access-Control-Allow-Origin', '*');
@@ -27,6 +28,7 @@ app.use(function(req, res, next){
 
 //endpoints
 app.use('/api/events', eventRouter);
+app.use('/api/users', userRouter);
 app.use('/', express.static('public'));
 app.use('*', (req, res) =>{
     return res.status(404).json({message: `Not found`});
@@ -37,7 +39,7 @@ let server;
 
 function runServer(databaseUrl, port=PORT){
     return new Promise((resolve, reject) => {
-        mongoose.connect((databaseUrl, err => {
+        mongoose.connect(databaseUrl, err => {
             if (err){
                 reject(err);
             }
@@ -48,7 +50,7 @@ function runServer(databaseUrl, port=PORT){
                 mongoose.disconnect();
                 reject(err);
             });
-        }));
+        });
     });
 }
 

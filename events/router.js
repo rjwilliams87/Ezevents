@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const {Events} = require('../models');
+const {Events} = require('./models');
 
 router.get('/', function(req, res){
     Events

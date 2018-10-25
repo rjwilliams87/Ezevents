@@ -19,11 +19,11 @@ UserSchema.methods.serialize = function(){
     };
 };
 
-UserSchema.methods.validate = function(){
+UserSchema.methods.validatePassword = function(){
     return bcrypt.compare(password, this.password);
 };
 
-UserSchema.methods.hashPassword = function(){
+UserSchema.methods.hashPassword = function(password){
     return bcrypt.hash(password, 10);
 }
 

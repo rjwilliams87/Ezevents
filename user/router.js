@@ -1,11 +1,14 @@
 'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 
 const {User} = require('./models');
+const {localStrategy, jwtStrategy} = require('../auth');
 
 const router = express.Router();
 const jsonParser = bodyParser.json();
+const jwtAuth = passport.authenticate('jwt', {session: false});
 
 //post req to reqister user 
 router.post('/', jsonParser, (req, res) => {

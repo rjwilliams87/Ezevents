@@ -24,9 +24,10 @@ router.post('/', jsonParser, (req, res) => {
         });
     }
     const stringFields = ['username', 'password', 'firstName', 'lastName'];
-    const nonStringField = stringFields.find((field) =>{
-        field in req.body && typeof req.body[field] !== 'string'
-    });
+
+   const nonStringField = stringFields.find(
+    field => field in req.body && typeof req.body[field] !== 'string'
+  );
 
     if (nonStringField){
         return res.status(422).json({
@@ -38,48 +39,60 @@ router.post('/', jsonParser, (req, res) => {
     }
 
     const trimmedFields = ['username', 'password'];
+    /*
     const nonTrimmedField = trimmedFields.find((field)=>{
-        req.body[field].trim() !== req.body[field]
+        req.body[field] !== req.body[field].replace(/\s/g, '');
     });
+    */
+   let nonTrimmedField;
+   for (let i = 0; i < trimmedFields.length; i++){
+       if (req.body[trimmedFields[i]] !== req.body[trimmedFields[i]].replace(/\s/g,'')){
+           nonTrimmedField = req.body[trimmedFields[i]];
+       }
+   }
 
     if (nonTrimmedField){
         return res.status(422).json({
             code: 422,
             reason: 'ValidationError',
-            message: 'Cannot have whitespace',
+            message: 'Cannot contain whitespace',
             location: nonTrimmedField
         });
     }
 
-    const sizeFields = {
+    const sizedFields = {
         username: {
-            min: 3,
-            max: 15
+          min: 3,
+          max: 20
         },
         password: {
-            min: 8,
-            max: 72
+          min: 8,
+          max: 72
         }
-    };
-
-    const tooSmallField = Object.keys(sizeFields).find((field)=>{
-        'min' in sizeFields[field] && req.body[field].trim().length < sizeFields[field].min
-    });
-
-    const tooBigField = Object.keys(sizeFields).find((field)=>{
-        'max' in sizeFields[field] && req.body[field].trim().length > sizeFields[field].max
-    });
-
-    if (tooSmallField || tooBigField){
+      };
+      const tooSmallField = Object.keys(sizedFields).find(
+        field =>
+          'min' in sizedFields[field] &&
+                req.body[field].trim().length < sizedFields[field].min
+      );
+      const tooLargeField = Object.keys(sizedFields).find(
+        field =>
+          'max' in sizedFields[field] &&
+                req.body[field].trim().length > sizedFields[field].max
+      );
+    
+      if (tooSmallField || tooLargeField) {
         return res.status(422).json({
-            code: 422,
-            reason: 'ValidationError',
-            message: 
-                tooSmallField ? `Must be at least ${sizeFields[tooSmallField].min} characters`
-                : `Must be less than ${sizeFields[tooBigField].max} characters`,
-            location: tooSmallField || tooBigField
+          code: 422,
+          reason: 'ValidationError',
+          message: tooSmallField
+            ? `Must be at least ${sizedFields[tooSmallField]
+              .min} characters long`
+            : `Must be at most ${sizedFields[tooLargeField]
+              .max} characters long`,
+          location: tooSmallField || tooLargeField
         });
-    }
+      }
 
     let {username, password, firstName = '', lastName = ''} = req.body;
     firstName = firstName.trim();

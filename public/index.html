@@ -14,17 +14,18 @@
         </section>
         <section class="login_container">
             <form class="login_form" action="">
+                <p class="login_error" hidden>Uh oh! Username or Password not recognized!</p>
                 <fieldset>
                     <label for="login_username" class="">Username:</label>
                     <input type="text" placeholder="ned123" id="login_username" class="" aria-live="" required>
                     <label for="login_password" class="">Password:</label>
                     <input type="password" placeholder="password" id="login_password" class="" aria-live="" required>
-                    <button type="submit">Login</button>
+                    <button type="submit" class="">Login</button>
                 </fieldset>
             </form>
-            <p>New to EZ Events? <span class="">Register here</span></p>
+            <p>New to EZ Events? <span class=""><a href="#" class="register_path">Register here</a></span></p>
         </section>
-        <section class="signup_container">
+        <section class="signup_container" hidden>
             <form action="signup_form">
                 <fieldset>
                     <label for="signup_firstName" class="">First Name:</label>
@@ -35,10 +36,13 @@
                     <input type="text" placeholder="whitewolf123" id="signup_username" class="" aria-live="" required>
                     <label for="signup_password" class="">Password:</label>
                     <input type="text" placeholder="password" id="signup_password" class="" aria-live="" required>
-                    <button type="submit">Sign Up</button>
+                    <button type="submit" class="signup_button">Sign Up</button>
                 </fieldset>
             </form>
         </section>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

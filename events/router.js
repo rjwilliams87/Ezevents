@@ -57,7 +57,13 @@ router.post('/', jwtAuth, function(req, res){
 });
 
 router.put('/:id', jwtAuth, function(req, res){
-    if (!(req.params.id && req.body.id & req.params.id === req.body.id)){
+    // if (!(Events.find({id: req.params.id}))){
+    //     res.status(400).json({
+    //         error: `Req path id does not exist`
+    //     })
+    // }
+
+    if (!(req.params.id && req.body.id && req.params.id === req.body.id)){
         res.status(400).json({
             error: `Req path id and req body id must match`
         });

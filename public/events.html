@@ -21,9 +21,62 @@
             <li>Logout</li>
         </ul>
     </nav>
-    <section class="events_display" hidden></section>
-    <section class="event_report" hidden></section>
-    
+    <main class="events_display" role="main">
+        <section class="events_list" aria-live="assertive">
+            <h1>My Events</h1>
+            <a href="#" class="js_create_event_button create_button" aria-label="create new event button">Create New Event</a>
+            <div class="event_table">
+
+            </div>
+        </section>
+        <section class="create_form" aria-live="assertive" hidden>
+            <form class="new_event_form">
+                <fieldset>
+                    <legend>Contact Information</legend>
+                    <label for="contact_firstName" class="">First Name:</label>
+                    <input type="text" id="contact_firstName" class="">
+                    <label for="contact_lastName" class="">Last Name:</label>
+                    <input type="text" id="contact_lastName" class="">
+                    <label for="contact_email" class="">Email:</label>
+                    <input type="text" id="contact_email" class="">
+                    <label for="contact_phone" class="">Phone:</label>
+                    <input type="text" id="contact_phone" class="">
+                </fieldset>
+                <fieldset>
+                    <legend>Event Date and Time</legend>
+                    <label for="event_date">Date:</label>
+                    <input type="text" id="event_date" class="">
+                    <label for="event_time">Time:</label>
+                    <input type="text" id="event_time">
+                </fieldset>
+                <fieldset class="food_order_input">
+                    <legend>Food Order</legend>
+                    <label for="event_food_item" class="">Food Item:</label>
+                    <input type="text" id="event_food_item" class="">
+                    <label for="item_cost">Cost Per Item:</label>
+                    <input type="number" id="item_cost">
+                    <button class="add_food_button">Add More Food</button>
+                </fieldset>
+                <fieldset class="bev_order_input">
+                        <legend>Beverage Order</legend>
+                        <label for="event_bev_item" class="">Beverage Item:</label>
+                        <input type="text" id="event_bev_item" class="">
+                        <label for="item_cost">Cost Per Item:</label>
+                        <input type="number" id="item_cost">
+                        <button class="add_bev_button">Add More Beverages</button>
+                </fieldset>
+                <fieldset>
+                    <legend>Room and Equipment Rental</legend>
+                    <label for="event_rental_price">Rental Price:</label>
+                    <input type="number" id="event_rental_price">
+                </fieldset>
+                <button type="submit">Create Event</button>
+                <button>Cancel</button>
+            </form>
+        </section>
+    </main>
+    <div class="event_report" hidden></div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="app.js"></script>
     <script src="main.js"></script>

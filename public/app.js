@@ -1,6 +1,6 @@
 'use strict';
 
-//function to get username and passworld
+//function to get username and password
 //make ajax request
 function userLogin(_username, _password){
     const user = {
@@ -19,7 +19,7 @@ function userLogin(_username, _password){
         window.location.href = 'events.html'
     })
     .fail(err => {
-        $('.login_error').prop('hidden', false);
+        // $('.login_error').prop('hidden', false);
     });
 }
 

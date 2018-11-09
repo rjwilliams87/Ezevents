@@ -26,7 +26,7 @@ router.get('/', jwtAuth, function(req, res){
 router.get('/:id', jwtAuth, function(req, res){
     Events.findOne({_id: req.params.id, user: req.user.username})
     .then((event)=>{
-        res.status(200).json(event.fullReport());
+        res.status(200).json(event.serialize());
     }).catch(err => {
         console.error(err);
         res.status(500).json({error: `Internal Server Error`});

@@ -11,18 +11,18 @@ function displayNewEventForm(){
 }
 
 function addFoodInputField(){
-    let count = 1;
+    let count = 0;
     $('.new_event_form').on('click', '.add_food_button', e => {
         e.preventDefault();
         count++
         $('.food_order_input').append(
             `
             <label for="event_food_item${count}" class="">Food Item:</label>
-            <input type="text" id="event_food_item${count}" class="">
+            <input type="text" id="event_food_item${count}" class="food_type" name="food[${count}][type]">
             <label for="item_cost${count}">Cost Per Item:</label>
-            <input type="number" id="item_cost${count}">
+            <input type="number" id="item_cost${count}" class="food_cost" name="food[${count}][pricePerOrder]">
             <label for="event_food_quantity${count}">Quantity</label>
-            <input type="number" id="event_food_quantity${count}" class="">
+            <input type="number" id="event_food_quantity${count}" class="food_quantity" name="food[${count}][quantity]">
             `
         );
     });
@@ -35,19 +35,19 @@ function addBevInputField(){
         count++
         $('.bev_order_input').append(
             `
-            <label for="event_bev_item${count}" class="">Beverage Item:</label>
-            <input type="text" id="event_bev_item${count}" class="">
-            <label for="item_cost${count}">Cost Per Item:</label>
-            <input type="number" id="item_cost${count}">
-            <label for="event_bev_quantity${count}">Quantity</label>
-            <input type="number" id="event_bev_quantity${count}" class="">
+            <label for="event_bev_item" class="">Beverage Item:</label>
+            <input type="text" id="event_bev_item" class="bev_type">
+            <label for="item_cost">Cost Per Item:</label>
+            <input type="number" id="item_cost" class="bev_cost">
+            <label for="event_bev_quantity">Quantity</label>
+            <input type="number" id="event_bev_quantity" class="bev_quantity">
             `
         )
     })
 }
 
 //api request
-//get all
+
 function getAllEventsData(callback){
     $.ajax({
         url: '/api/events',
@@ -80,15 +80,18 @@ function displayAllEvents(data){
 }
 
 function generateEventRowDisplay(data){
-    const {id, contact, date, orderTotal} = data;
+    const {id, contact, date, order} = data;
+    let foodTotalCost = order.food.map((index)=> index.pricePerOrder * index.quantity).reduce((a, b) => {return a+b});
+    let bevTotalCost = order.beverages.map((index)=> index.pricePerOrder * index.quantity).reduce((a, b) => {return a+b});
+    let totalCost = foodTotalCost + bevTotalCost + order.rentalPrice;
     $('.event_table').append(
         `
         <div>
             <ul>
                 <li><a href="#" id="${id}" class="event_id">Event #${id}</a></li>
-                <li>${contact}</li>
+                <li>${contact.lastName}, ${contact.firstName}</li>
                 <li>${date}</li>
-                <li>${orderTotal}</li>
+                <li>${totalCost}</li>
             <ul>
         </div>
         `
@@ -96,6 +99,14 @@ function generateEventRowDisplay(data){
 }
 
 function getAndDisplayEventTable(){
+    $('main').prop('hidden', false);
+    $('.event_table').html('');
+    $('.events_list').prop('hidden', false);
+    $('.event_table').prop('hidden', false);
+    $('.event_report').prop('hidden', true);
+    $('.update_form').prop('hidden', true);
+    $('.create_form').prop('hidden', true);
+    // getAllEventsData(displayAllEvents);
     getAllEventsData(displayAllEvents);
 }
 //this doesn't go here move it after work
@@ -124,7 +135,10 @@ function displayEventById(data){
 }
 
 function generateEventReportById(data){
-    const {id, contact, date, time, order, beverageTotalCost, foodTotalCost, orderTotal} = data;
+    const {id, contact, date, time, order} = data;
+    let foodTotalCost = order.food.map((index)=> index.pricePerOrder * index.quantity).reduce((a, b) => {return a+b});
+    let bevTotalCost = order.beverages.map((index)=> index.pricePerOrder * index.quantity).reduce((a, b) => {return a+b});
+    let totalCost = foodTotalCost + bevTotalCost + order.rentalPrice;
     $('.event_report').html(
         `
         <div class="event_report_display">
@@ -152,9 +166,9 @@ function generateEventReportById(data){
                 `}).join('')}
                 <h3>Invoice Total</h3>
                 <p>Total Food Cost: $${foodTotalCost}</p>
-                <p>Total Beverage Cost: $${beverageTotalCost}</p>
+                <p>Total Beverage Cost: $${bevTotalCost}</p>
                 <p>Rental Price: $${order.rentalPrice}</p>
-                <p>Total Event Cost: $${orderTotal}</p>
+                <p>Total Event Cost: $${totalCost}</p>
             </div>
         </div>
         <div class="update_delete_section" id="${id}">
@@ -172,7 +186,7 @@ function getAndDisplayEventById(){
         e.preventDefault();
         $('main').prop('hidden', true);
         $('.event_report').prop('hidden', false);
-        const id = $('.event_id').attr('id');
+        const id = $(e.target).closest('a').attr('id');
         getEventDataById(id, displayEventById)
     })
 }
@@ -226,11 +240,11 @@ function displayUpdateForm(data){
             <legend>Food Order</legend>
             ${order.food.map(item => {return `
                 <label for="update_food_item" class="">Food Item:</label>
-                <input type="text" id="update_food_item" class="" value="${item.type}">
+                <input type="text" id="update_food_item" class="food_type" value="${item.type}">
                 <label for="update_food_cost">Cost Per Item:</label>
-                <input type="number" id="update_food_cost" value="${item.pricePerOrder}">
+                <input type="number" id="update_food_cost" class="food_cost" value="${item.pricePerOrder}">
                 <label for="update_food_quantity">Quantity</label>
-                <input type="number" id="update_food_quantity" class="" value="${item.quantity}">`
+                <input type="number" id="update_food_quantity" class="food_quantity" value="${item.quantity}">`
             }).join('')}
             <button class="add_food_button">Add More Food</button>
         </fieldset>
@@ -238,11 +252,11 @@ function displayUpdateForm(data){
                 <legend>Beverage Order</legend>
                 ${order.beverages.map(item => {return `
                 <label for="update_bev_item" class="">Food Item:</label>
-                <input type="text" id="update_bev_item" class="" value="${item.type}">
+                <input type="text" id="update_bev_item" class="bev_type" value="${item.type}">
                 <label for="update_bev_cost">Cost Per Item:</label>
-                <input type="number" id="update_bev_cost" value="${item.pricePerOrder}">
+                <input type="number" id="update_bev_cost" class="bev_cost" value="${item.pricePerOrder}">
                 <label for="update_bev_quantity">Quantity</label>
-                <input type="number" id="update_bev_quantity" class="" value="${item.quantity}">`
+                <input type="number" id="update_bev_quantity" class="bev_quantity" value="${item.quantity}">`
             }).join('')}
                 <button class="add_bev_button">Add More Beverages</button>
         </fieldset>
@@ -271,19 +285,72 @@ function createAndDisplayUpdateForm(){
 function handleUpdateSubmit(){
     $('.event_report').on('click', '.js_put_btn', e => {
         e.preventDefault();
+        let foodType = [];
+        let foodCost = [];
+        let foodQuantity = [];
+        let foodObjects = []
+        $('.food_type').each(function(){
+            let input = $(this).val();
+            foodType.push(input);
+        })
+        $('.food_cost').each(function(){
+            let input = $(this).val();
+            foodCost.push(input);
+        })
+        $('.food_quantity').each(function(){
+            let input = $(this).val();
+            foodQuantity.push(input);
+        })
+        for(let i = 0; i < foodType.length; i++){
+            foodObjects.push({
+                type: foodType[i],
+                pricePerOrder: foodCost[i],
+                quantity: foodQuantity[i]
+            })
+        }
+
+        let bevType = [];
+        let bevCost = [];
+        let bevQuantity = [];
+        let bevObjects = []
+        $('.bev_type').each(function(){
+            let input = $(this).val();
+            bevType.push(input);
+        })
+        $('.bev_cost').each(function(){
+            let input = $(this).val();
+            bevCost.push(input);
+        })
+        $('.bev_quantity').each(function(){
+            let input = $(this).val();
+            bevQuantity.push(input);
+        })
+        for(let i = 0; i < bevType.length; i++){
+            bevObjects.push({
+                type: bevType[i],
+                pricePerOrder: bevCost[i],
+                quantity: bevQuantity[i]
+            })
+        }
         const id = $('.js_put_btn').attr('id');
         const eventInfo = {
+            id: id,
             contact: {
-                firstName: $('#update_fristName').val(),
+                firstName: $('#update_firstName').val(),
                 lastName: $('#update_lastName').val(),
                 email: $('#update_email').val(),
                 phone: $('#update_phone').val()
             },
             date: $('#update_date').val(),
             time: $('#update_time').val(),
+            order: {
+                food: foodObjects,
+                beverages: bevObjects,
+                rentalPrice: $('#update_rental_price').val()
+            }
+
         };
         updateEventData(id, eventInfo);
-        refreshEventsPage();
     })
 }
 
@@ -291,55 +358,34 @@ createAndDisplayUpdateForm();
 handleUpdateSubmit();
 
 //DELETE deleting event
-// function deleteEvent(_id){
-//     $.ajax({
-//         url: `/api/events/${_id}`, 
-//         contentType: 'application/json',
-//         method: 'DELETE',
-//         headers: {
-//             'Authorization': `Bearer ${token}`
-//         }
-//     })
-//     .done(()=>{
-//         refreshEventsPage();
-//     })
-//     .fail(err => {
-//         console.error(`error: ${err.message}`);
-//     })
-// }
-
-// function handleDeleteButton(){
-//     $('.event_report').on('click', '.js_delete_button', e=>{
-//         e.preventDefault();
-//         const eventId = $(this).find($('.update_delete_section')).attr('id');
-//         const id = parseInt(eventId);
-//         deleteEvent(id);
-//     })
-// }
-// handleDeleteButton();
-
-//POST create event
-function postEventData(){
-    const eventInfo = {
-        contact: {
-            firstName: $('#contact_firstName').val(),
-            lastName: $('#contact_lastName').val(),
-            email: $('#contact_email').val(),
-            phone: $('#contact_phone').val()
-        },
-        date: $('#event_date').val(),
-        time: $('#event_time').val(),
-        order: {
-            // food: [{
-            //     type: $('.event_food_item'),
-            //     pricePerOrder: $('.food_item_cost')
-            // }],
-            // beverages:
-            rentalPrice: $('#event_rental_price').val()
+function deleteEvent(_id){
+    $.ajax({
+        url: `/api/events/${_id}`, 
+        contentType: 'application/json',
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
         }
-    };
-    $('.create_form').on('submit', e => {
+    })
+    .done(()=>{
+        refreshEventsPage();
+    })
+    .fail(err => {
+        console.error(`error: ${err.message}`);
+    })
+}
+
+function handleDeleteButton(){
+    $('.event_report').on('click', '.js_delete_button', e=>{
         e.preventDefault();
+        const id = $('.update_delete_section').attr('id')
+        deleteEvent(id);
+    })
+}
+handleDeleteButton();
+
+// POST create event
+function postEventData(_eventInfo){
         $.ajax({
             url: '/api/events',
             contentType: 'application/json',
@@ -347,20 +393,88 @@ function postEventData(){
             headers: {
                 'Authorization': `Bearer ${token}`
             },
-            data: JSON.stringify(eventInfo),
+            data: JSON.stringify(_eventInfo),
             dataType: 'json'
         })
         .done(() => {
-            refreshEventsDisplay();
+            refreshEventsPage();
         })
         .fail(err => {
             console.error(`error: ${err.message}`);
         })
-    refreshEventsPage();
-    });
 }
-//doesn't go here, for testing purpose
-postEventData();
+
+function handleCreateButton(){
+    $('.create_form').on('submit', e => {
+        let foodType = [];
+        let foodCost = [];
+        let foodQuantity = [];
+        let foodObjects = []
+        $('.food_type').each(function(){
+            let input = $(this).val();
+            foodType.push(input);
+        })
+        $('.food_cost').each(function(){
+            let input = $(this).val();
+            foodCost.push(input);
+        })
+        $('.food_quantity').each(function(){
+            let input = $(this).val();
+            foodQuantity.push(input);
+        })
+        for(let i = 0; i < foodType.length; i++){
+            foodObjects.push({
+                type: foodType[i],
+                pricePerOrder: foodCost[i],
+                quantity: foodQuantity[i]
+            })
+        }
+
+        let bevType = [];
+        let bevCost = [];
+        let bevQuantity = [];
+        let bevObjects = []
+        $('.bev_type').each(function(){
+            let input = $(this).val();
+            bevType.push(input);
+        })
+        $('.bev_cost').each(function(){
+            let input = $(this).val();
+            bevCost.push(input);
+        })
+        $('.bev_quantity').each(function(){
+            let input = $(this).val();
+            bevQuantity.push(input);
+        })
+        for(let i = 0; i < bevType.length; i++){
+            bevObjects.push({
+                type: bevType[i],
+                pricePerOrder: bevCost[i],
+                quantity: bevQuantity[i]
+            })
+        }
+
+        e.preventDefault();
+        const eventInfo = {
+            contact: {
+                firstName: $('#contact_firstName').val(),
+                lastName: $('#contact_lastName').val(),
+                email: $('#contact_email').val(),
+                phone: $('#contact_phone').val()
+            },
+            date: $('#event_date').val(),
+            time: $('#event_time').val(),
+            order: {
+                food: foodObjects,
+                beverages: bevObjects,
+                rentalPrice: $('#event_rental_price').val()
+            }
+        };
+        postEventData(eventInfo);
+    })
+}
+
+handleCreateButton();
 //clean up below, for testing purposes for now
 function refreshEventsPage(){
     getAndDisplayEventTable();

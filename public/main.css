@@ -1,0 +1,191 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* landing page */
+
+/* landing_container, signup_container {
+    display: flex;
+} */
+
+/* .login_form, .signup_form {
+    display: flex;
+} */
+
+body{
+    background-color: #298eea;
+}
+
+.landing_container{
+    height: 100vh;
+    width: 100vw;
+    /* margin-top: 50px; */
+}
+
+.header{
+    color: white;
+    padding: 20px; 
+    width: 100vw;
+    background-color: navy;
+}
+
+.landing_description{
+    color: white;
+    text-align: center;
+    font-size: 7vw;
+    padding: 2vh;
+    margin-top: 2vh;
+}
+
+.landing_p{
+    text-align: center;
+}
+
+.login_container {
+    margin-top: 20px; 
+}
+
+.login_form{}
+
+.login_header{
+    visibility: hidden;
+}
+
+.login_fields {
+    display: flex;
+    background-color: white;
+    margin: 0 auto;
+    width: 90vw;
+    height: 35vh;
+    padding-top: 10px; 
+    border-radius: 5px; 
+    border: white;
+}
+
+.login_label{
+    display: block;
+    margin-left: 15vw;
+    margin-top: 1vh;
+    padding: 1vh 0;
+}
+
+.login_input {
+    display: block;
+    width: 60vw;
+    height: 3.5vh;
+    margin-left: 15vw;
+    background-color: lightyellow;
+    padding: 1vh;
+}
+
+.login_button, .signup_button{
+    width: 60vw;
+    height: 4.5vh;
+    margin: 3.5vh auto; 
+    background-color: green;
+    border: green;
+    color: white;
+}
+
+.register_p {
+    display: block; 
+    text-align: center;
+    margin-top: 3vh;
+    color: white;
+}
+
+.register_path {
+    color: white;
+}
+
+/* .signup_container{
+    margin: 0 auto;
+    width: 90vw;
+    padding-top: 10px; 
+    border-radius: 5px; 
+} */
+
+.singup_fields{
+    background-color: white;
+    display: flex;
+    border: 0;
+    height: 50vh;
+    margin: 0 auto;
+    width: 90vw;
+    padding-top: 10px; 
+    border-radius: 5px; 
+}
+
+@media only screen and (min-width: 668px){
+    
+}
+
+@media only screen and (min-width: 900px){
+    .page_container{
+        display: flex;
+        justify-content: space-around;
+    }
+    .banner{
+
+    }
+
+    .landing_description{
+        font-size: 30px; 
+    }
+
+    .login_header{
+        visibility: visible;
+        font-size: 28px; 
+        text-align: center;
+        position: relative;
+        top: 30px; 
+        margin-bottom: 15px; 
+    }
+
+    .login_fields{
+        width: 400px; 
+        height: 400px; 
+    }
+
+    .signup_container{
+
+    }
+
+    .singup_fields{
+        width: 400px; 
+        height: 450px; 
+        margin-top: 20px; 
+    }
+
+    .login_label{
+        margin-left: 50px; 
+        font-size: 18px; 
+        margin-top: 20px; 
+    }
+
+    .login_input{
+        width: 300px;
+        margin-left: 50px; 
+        height: 40px; 
+        font-size: 16px; 
+    }
+
+    .signup_label{
+        font-size: 16px; 
+        margin-top: 16px; 
+    }
+
+    .login_button{
+        width: 300px; 
+        height: 40px; 
+        margin-top: 50px; 
+    }
+
+    .signup_button{
+        width: 300px; 
+        height: 40px; 
+        margin-top: 20px;  
+    }
+}

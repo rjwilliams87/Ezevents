@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EZ Events</title>
+    <link rel="stylesheet" href="main.css" type="text/css">
 </head>
 <body>
     <!--
@@ -30,43 +31,43 @@
             </div>
         </section>
         <section class="create_form" aria-live="assertive" hidden>
-            <form class="new_event_form" action="/api/events" method="POST">
+            <form class="new_event_form">
                 <fieldset>
                     <legend>Contact Information</legend>
                     <label for="contact_firstName" class="">First Name:</label>
-                    <input type="text" id="contact_firstName" class="">
+                    <input type="text" id="contact_firstName" class="" required>
                     <label for="contact_lastName" class="">Last Name:</label>
-                    <input type="text" id="contact_lastName" class="">
+                    <input type="text" id="contact_lastName" class="" required>
                     <label for="contact_email" class="">Email:</label>
-                    <input type="text" id="contact_email" class="">
+                    <input type="email" id="contact_email" class="">
                     <label for="contact_phone" class="">Phone:</label>
                     <input type="text" id="contact_phone" class="">
                 </fieldset>
                 <fieldset>
                     <legend>Event Date and Time</legend>
                     <label for="event_date">Date:</label>
-                    <input type="text" id="event_date" class="">
+                    <input type="date" id="event_date" class="" required>
                     <label for="event_time">Time:</label>
                     <input type="text" id="event_time">
                 </fieldset>
                 <fieldset class="food_order_input">
                     <legend>Food Order</legend>
                     <label for="event_food_item" class="">Food Item:</label>
-                    <input type="text" id="event_food_item" class="">
-                    <label for="item_cost">Cost Per Item:</label>
-                    <input type="number" id="item_cost">
+                    <input type="text" id="event_food_item" class="food_type" name="food[0][type]">
+                    <label for="food_item_cost">Cost Per Item:</label>
+                    <input type="number" id="food_item_cost" class="food_cost" name="food[0][pricePerOrder]">
                     <label for="event_food_quantity">Quantity</label>
-                    <input type="number" id="event_food_quantity" class="">
+                    <input type="number" id="event_food_quantity" class="food_quantity" name="food[0][quantity]">
                     <button class="add_food_button">Add More Food</button>
                 </fieldset>
                 <fieldset class="bev_order_input">
                         <legend>Beverage Order</legend>
                         <label for="event_bev_item" class="">Beverage Item:</label>
-                        <input type="text" id="event_bev_item" class="">
-                        <label for="item_cost">Cost Per Item:</label>
-                        <input type="number" id="item_cost">
+                        <input type="text" id="event_bev_item" class="bev_type">
+                        <label for="bev_item_cost">Cost Per Item:</label>
+                        <input type="number" id="bev_item_cost" class="bev_cost">
                         <label for="event_bev_quantity">Quantity</label>
-                        <input type="number" id="event_bev_quantity" class="">
+                        <input type="number" id="event_bev_quantity" class="bev_quantity">
                         <button class="add_bev_button">Add More Beverages</button>
                 </fieldset>
                 <fieldset>

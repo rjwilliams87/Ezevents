@@ -5,41 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EZEvents Sign In</title>
+    <link rel="stylesheet" href="main.css" type="text/css">
 </head>
 <body>
     <div class="landing_container">
-        <section class="landing_description">
-            <h1>EZ Events</h1>
-            <p>Easily add and track events</p>
-        </section>
-        <section class="login_container">
-            <form class="login_form" action="">
-                <p class="login_error" hidden>Uh oh! Username or Password not recognized!</p>
-                <fieldset>
-                    <label for="login_username" class="">Username:</label>
-                    <input type="text" placeholder="ned123" id="login_username" class="" aria-live="" required>
-                    <label for="login_password" class="">Password:</label>
-                    <input type="password" placeholder="password" id="login_password" class="" aria-live="" required>
-                    <button type="submit" class="">Login</button>
-                </fieldset>
-            </form>
-            <p>New to EZ Events? <span class=""><a href="#" class="register_path">Register here</a></span></p>
-        </section>
-        <section class="signup_container" hidden>
-            <form class="signup_form">
-                <fieldset>
-                    <label for="signup_firstName" class="">First Name:</label>
-                    <input type="text" placeholder="Jon" id="signup_firstName" class="" aria-live="" required>
-                    <label for="signup_lastName" class="">Last Name:</label>
-                    <input type="text" placeholder="Snow" id="signup_lastName" class="" aria-live="" required>
-                    <label for="signup_username">Username:</label>
-                    <input type="text" placeholder="whitewolf123" id="signup_username" class="" aria-live="" required>
-                    <label for="signup_password" class="">Password:</label>
-                    <input type="text" placeholder="password" id="signup_password" class="" aria-live="" required>
-                    <button type="submit" class="signup_button">Sign Up</button>
-                </fieldset>
-            </form>
-        </section>
+        <nav class="banner" role="banner">
+            <h1 class="header">EZ Events</h1>
+        </nav>
+        <div class="page_container">
+            <p class="landing_description">Easily add and track events</p>
+            <section class="login_container">
+                <form class="login_form" action="">
+                    <p class="login_error" hidden>Uh oh! Username or Password not recognized!</p>
+                    <fieldset class="login_fields">
+                        <legend class="login_header">Login</legend>
+                        <label for="login_username" class="login_label">Username:</label>
+                        <input type="text" placeholder="ned123" id="login_username" class="login_input" aria-live="" required>
+                        <label for="login_password" class="login_label">Password:</label>
+                        <input type="password" placeholder="password" id="login_password" class="login_input" aria-live="" required>
+                        <button type="submit" class="login_button">Login</button>
+                    </fieldset>
+                </form>
+                <p class="register_p">New to EZ Events? <span class=""><a href="#" class="register_path">Register here</a></span></p>
+            </section>
+            <section class="signup_container" hidden>
+                <form class="signup_form">
+                    <fieldset class="singup_fields">
+                        <label for="signup_firstName" class="login_label signup_label">First Name:</label>
+                        <input type="text" placeholder="Jon" id="signup_firstName" class="login_input signup_input" aria-live="" required>
+                        <label for="signup_lastName" class="login_label signup_label">Last Name:</label>
+                        <input type="text" placeholder="Snow" id="signup_lastName" class="login_input signup_input" aria-live="" required>
+                        <label for="signup_username" class="login_label signup_label">Username:</label>
+                        <input type="text" placeholder="whitewolf123" id="signup_username" class="login_input signup_input" aria-live="" required>
+                        <label for="signup_password" class="login_label signup_label">Password:</label>
+                        <input type="text" placeholder="password" id="signup_password" class="login_input signup_input" aria-live="" required>
+                        <button type="submit" class="signup_button">Sign Up</button>
+                    </fieldset>
+                </form>
+            </section>
+        </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="app.js"></script>

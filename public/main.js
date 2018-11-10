@@ -2,6 +2,15 @@
 const token = localStorage.getItem('authToken');
 const username = localStorage.getItem('username');
 
+//nav bar toggle
+function menuToggle(){
+    $('.menu_toggle').on('click', function(){
+        $('nav').toggleClass('toggle');
+    })
+}
+
+menuToggle();
+
 function displayNewEventForm(){
     $('.js_create_event_button').click(e => {
         e.preventDefault();

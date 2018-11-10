@@ -1,7 +1,5 @@
 'use strict';
 
-//function to get username and password
-//make ajax request
 function userLogin(_username, _password){
     const user = {
         username: _username,

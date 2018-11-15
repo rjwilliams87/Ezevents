@@ -17,7 +17,7 @@ const eventSchema = mongoose.Schema({
         email: String, 
         phone: String
     },
-    date: String, 
+    date: Date, 
     time: String, 
     order: {
         food: [foodAndBevSchema],

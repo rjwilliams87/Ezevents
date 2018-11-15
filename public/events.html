@@ -9,76 +9,84 @@
     <link rel="stylesheet" href="events.css" type="text/css">
 </head>
 <body>
-    <header>
-        <h1>EZ Events</h1>
-        <nav class="">
-            <ul class="nav_list">
-                <li class="active"><a href="#">My Events</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-        </nav>
-        <div class="menu_toggle"><i class="fa fa-bars" aria-hidden="true"></i></div>
-    </header>
-    <main class="events_display" role="main">
-        <section class="events_list" aria-live="assertive">
-            <h1>My Events</h1>
-            <a href="#" class="js_create_event_button create_button" aria-label="create new event button">Create New Event</a>
-            <div class="event_table">
+    <div id="wrapper">
+        <header>
+            <h1>EZ Events</h1>
+            <nav class="">
+                <ul class="nav_list">
+                    <li class="active"><a href="#">My Events</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </nav>
+            <div class="menu_toggle"><i class="fa fa-bars" aria-hidden="true"></i></div>
+        </header>
+        <main class="events_display" role="main">
+            <section class="events_list" aria-live="assertive">
+                <!-- <h2>My Events</h2> -->
+                <a href="#" class="js_create_event_button create_button" aria-label="create new event button">Create New Event</a>
+                <div class="event_table">
 
-            </div>
-        </section>
-        <section class="create_form" aria-live="assertive" hidden>
-            <form class="new_event_form">
-                <fieldset>
-                    <legend>Contact Information</legend>
-                    <label for="contact_firstName" class="">First Name:</label>
-                    <input type="text" id="contact_firstName" class="" required>
-                    <label for="contact_lastName" class="">Last Name:</label>
-                    <input type="text" id="contact_lastName" class="" required>
-                    <label for="contact_email" class="">Email:</label>
-                    <input type="email" id="contact_email" class="">
-                    <label for="contact_phone" class="">Phone:</label>
-                    <input type="text" id="contact_phone" class="">
-                </fieldset>
-                <fieldset>
-                    <legend>Event Date and Time</legend>
-                    <label for="event_date">Date:</label>
-                    <input type="date" id="event_date" class="" required>
-                    <label for="event_time">Time:</label>
-                    <input type="text" id="event_time">
-                </fieldset>
-                <fieldset class="food_order_input">
-                    <legend>Food Order</legend>
-                    <label for="event_food_item" class="">Food Item:</label>
-                    <input type="text" id="event_food_item" class="food_type" name="food[0][type]">
-                    <label for="food_item_cost">Cost Per Item:</label>
-                    <input type="number" id="food_item_cost" class="food_cost" name="food[0][pricePerOrder]">
-                    <label for="event_food_quantity">Quantity</label>
-                    <input type="number" id="event_food_quantity" class="food_quantity" name="food[0][quantity]">
-                    <button class="add_food_button">Add More Food</button>
-                </fieldset>
-                <fieldset class="bev_order_input">
-                        <legend>Beverage Order</legend>
-                        <label for="event_bev_item" class="">Beverage Item:</label>
-                        <input type="text" id="event_bev_item" class="bev_type">
-                        <label for="bev_item_cost">Cost Per Item:</label>
-                        <input type="number" id="bev_item_cost" class="bev_cost">
-                        <label for="event_bev_quantity">Quantity</label>
-                        <input type="number" id="event_bev_quantity" class="bev_quantity">
-                        <button class="add_bev_button">Add More Beverages</button>
-                </fieldset>
-                <fieldset>
-                    <legend>Room and Equipment Rental</legend>
-                    <label for="event_rental_price">Rental Price:</label>
-                    <input type="number" id="event_rental_price">
-                </fieldset>
-                <button type="submit">Create Event</button>
-                <button>Cancel</button>
-            </form>
-        </section>
-    </main>
-    <div class="event_report" hidden></div>
+                </div>
+            </section>
+            <section class="create_form" aria-live="assertive" hidden>
+                <form class="new_event_form">
+                    <fieldset>
+                        <legend>Contact Information</legend>
+                        <label for="contact_firstName" class="">First Name:</label>
+                        <input type="text" id="contact_firstName" class="" required>
+                        <label for="contact_lastName" class="">Last Name:</label>
+                        <input type="text" id="contact_lastName" class="" required>
+                        <label for="contact_email" class="">Email:</label>
+                        <input type="email" id="contact_email" class="">
+                        <label for="contact_phone" class="">Phone:</label>
+                        <input type="text" id="contact_phone" class="">
+                    </fieldset>
+                    <fieldset>
+                        <legend>Event Date and Time</legend>
+                        <label for="event_date">Date:</label>
+                        <input type="date" id="event_date" class="" required>
+                        <label for="event_time">Time:</label>
+                        <input type="text" id="event_time">
+                    </fieldset>
+                    <fieldset>
+                        <legend>Food Order</legend>
+                        <div class="food_order_input">
+                            <label for="event_food_item" class="">Food Item:</label>
+                            <input type="text" id="event_food_item" class="food_type" name="food[0][type]">
+                            <label for="food_item_cost">Cost Per Item:</label>
+                            <input type="number" id="food_item_cost" class="food_cost" name="food[0][pricePerOrder]">
+                            <label for="event_food_quantity">Quantity</label>
+                            <input type="number" id="event_food_quantity" class="food_quantity" name="food[0][quantity]">
+                        </div>
+                        <button class="add_food_button">Add To Order</button>
+                    </fieldset>
+                    <fieldset>
+                            <legend>Beverage Order</legend>
+                            <div class="bev_order_input">
+                                <label for="event_bev_item" class="">Beverage Item:</label>
+                                <input type="text" id="event_bev_item" class="bev_type">
+                                <label for="bev_item_cost">Cost Per Item:</label>
+                                <input type="number" id="bev_item_cost" class="bev_cost">
+                                <label for="event_bev_quantity">Quantity</label>
+                                <input type="number" id="event_bev_quantity" class="bev_quantity">
+                            </div>
+                            <button class="add_bev_button">Add To Order</button>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Room and Equipment Rental</legend>
+                        <label for="event_rental_price">Rental Price:</label>
+                        <input type="number" id="event_rental_price">
+                    </fieldset>
+                    <div class="create_form_buttons">
+                        <button type="submit" class="post_form_button">Create</button>
+                        <button class="cancel_post_button">Cancel</button>
+                    </div>  
+                </form>
+            </section>
+        </main>
+        <div class="event_report" hidden></div>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="app.js"></script>

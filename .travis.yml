@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: gBeb9uqDJlodlxIuuh4ndCj9tZuGHVqTKDmpLjrVkhfuxcASNnb9eL9mqOlffDVTopix4bGvOD8BuOLLdcf1F8DXmQZUKhSv3RQfxbW8uZEOyeQQpEeSThUw3ykXVCu+5E+oaBhOmD65bH5SCbapBIynS7LSz/sElNLDfDTE9h5j0hWx2P2WNPwqwkQV5/mikvIKYcE3Tvqgy6LVsJmPyZwVi8F/UfOHC01/ro+kMkR4WH+JGq2P3bFmvl+dVJ3hdYI9CDaT0GuESwfDSRSBnZQZnidFDJhqvZE+0n872zZVRZ3MbjgYGMZPNz6tPOIoVPw3qN3STajUfPZJltxdbPDkICvD8LVSy21kKDOad/2tvh1mxgjlvjwBnda3Duyl0JHW37IuRD1dxnMGQyslaOGa+8UL6up3zGa3EpgPIcrshqSyHnN+iHPng2v3HbKCcPJlDbTR0nogUU49B+whYob6U4teLAz8L6bmoKlI/79U9KfIqwxJeb8AKAQjGWUdWH74pHj1J6jbGmb0480MroMxbndkQ+qdb/nrSS0Fa/CIbCdnaPnXexH4KSHmUSURe9jyB+tZMijmOVJ7ed99/WGbTiLD0p501s/AejGqum8HUyXHHRZjRN1ZVSd+/ckx7WfOJbU4M0MvYbkVxsUWlqYp+ZN7GBflzIF25UIn7WI=
+  app: Ezevents
+  on:
+    repo: rjwilliams87/Ezevents

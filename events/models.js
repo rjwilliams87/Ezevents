@@ -17,7 +17,7 @@ const eventSchema = mongoose.Schema({
         email: String, 
         phone: String
     },
-    date: Date, 
+    date: Date,
     time: String, 
     order: {
         food: [foodAndBevSchema],
@@ -41,6 +41,9 @@ const eventSchema = mongoose.Schema({
 // eventSchema.virtual('orderTotal').get(function(){
 //     return `${JSON.parse(this.beverageOrderCost) + JSON.parse(this.foodOrderCost) + (this.order.rentalPrice)}`;
 // })
+// eventSchema.virtual('dateString').get(function(){
+//     return `${this.date.toDateString()}`
+// });
 
 eventSchema.methods.serialize = function(){
     return {

@@ -17,7 +17,9 @@ function userLogin(_username, _password){
         window.location.href = 'events.html'
     })
     .fail(err => {
-        // $('.login_error').prop('hidden', false);
+        $('.login_error').prop('hidden', false);
+        $('#login_username').val('');
+        $('#login_password').val('');
     });
 }
 
@@ -37,6 +39,15 @@ function handleRegisterClick(){
     })
     watchSignupSubmit();
 }
+
+function handleShowLoginClick() {
+    $('.login_path').click(e => {
+        $('.signup_container').prop('hidden', true);
+        $('.login_container').prop('hidden', false);
+    })
+}
+
+handleShowLoginClick();
 
 function handleLoginClick(){
 
@@ -60,7 +71,15 @@ function registerUser(_username, _password, _firstName, _lastName){
         $('.signup_container').prop('hidden', true);
     })
     .fail(err => {
-        //display failure message
+        if(err.responseJSON.message === `username already exist`) {
+            $('.username_error').prop('hidden', false);
+            $('#signup_username').val('');
+            $('#signup_password').val('');
+        }else if(err.responseJSON.location === `password`) {
+            $('#signup_username').val('');
+            $('#signup_password').val('');
+            $('.password_info').html('Too short! Try again.')
+        }
         console.error(err);
     })
 }

@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: sans-serif;
 }
 
 body{
@@ -9,35 +10,27 @@ body{
 }
 
 @media only screen and (min-width: 320px){
+
     header{
         position: fixed;
         width: 100%;
         top: 0; 
         left: 0;
         padding: 0 20px; 
-        background-color: #5BC0EB;
+        background-color: #5BC0EB; 
         color: white;
+        box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.411);
         z-index: 10; 
     }
 
-    h1{
-        height: 50px;
-        line-height: 50px; 
-        font-size: 24px; 
-        font-weight: bold;
-        float: left;
-    }
-
     nav {
-        /* visibility: hidden; */
-        /* display: none; */
         position: absolute;
-        width: 100%; 
-        height: 100vh;; 
+        width: 40%; 
+        height: 153px; 
         background-color: #5BC0EB;
-        top: -100vh;
-        left: 0;
-        transition: 0.7s;
+        top: 50px;
+        right: -100vw;
+        z-index: 3;
     }
 
     .nav_list{
@@ -77,13 +70,21 @@ body{
         cursor: pointer;
     }
 
+    h1{
+        height: 50px;
+        line-height: 50px; 
+        font-size: 24px; 
+        font-weight: bold;
+        float: left;
+    }
+
     main{
         position: relative;
         top: 75px; 
     }
 
     .toggle{
-        top: 50px; 
+        right: 0; 
     }
 
     main{
@@ -102,18 +103,22 @@ body{
 
     .create_button{
         text-decoration: none;
-        color: navy;
+        color: white;
+        background: royalblue;
         margin: 5px auto 10px auto;
         width: 175px;
         padding: 10px; 
         text-align: center;
-        border: 3px solid navy;
+        /* border: 3px solid white; */
         border-radius: 5px; 
+        font-weight: bold;
+        box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.8);
     }
 
     .create_button:hover{
         cursor: pointer;
-        background-color: skyblue;
+        background-color:rgba(65,105,225,0.2);
+        color: royalblue;
     }
 
     .event_table{
@@ -122,6 +127,7 @@ body{
     }
 
     .event_table_row{
+        max-width: 600px;
         margin-top: 10px; 
         background-color: #7CDF64;
         /* color: white; */
@@ -130,22 +136,45 @@ body{
         padding: 10px;
     }
 
-    .event_id{
-        color: #000000;
+    .table_li {
+        list-style: none;
+        margin: 5px;
+    }
+
+    .table_li_icons {
+        text-align: center;
+    }
+
+    .event_report_path {
+        text-align: center;
+        font-weight: bold;
+        /* border: 1px solid black; */
+        margin-bottom: 20px; 
+    }
+
+    .event_id {
+        color: black;
+        text-decoration: none;
+        border: 1px solid black;
+        border-radius: 5px; 
+        padding: 10px;
+        margin-bottom: 5px; 
+        background: rgba(255,255,255,0.4);
+        box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
+        
+    }
+
+    .event_id:hover {
+        cursor: pointer;
+        background: rgba(255,255,255,0.7);
     }
     
     .row_list{
         padding: 10px; 
     }
 
-    .row_list li{
-        list-style: none;
-        margin: 5px;
-    }
-
     .row_list_category{
         font-weight: bold;
-        
     }
 
     .icon{
@@ -184,6 +213,12 @@ body{
 
     .create_form:hover {
         box-shadow: 4px -7px 15px -2px black;
+    }
+
+    .form_heading{ 
+        font-size: 24px; 
+        text-align: center;
+        padding: 10px; 
     }
 
     .create_form fieldset{
@@ -247,17 +282,35 @@ body{
     }
 
     .post_form_button{
+        background: royalblue;
+        border: royalblue;
         margin-left: 0;
         margin-right: 5vw;
     }
 
+    .cancel_post_button {
+        background: red;
+        border: red;
+    }
+
     .post_form_button,
     .cancel_post_button{
-        width: 60px;
+        width: 80px;
         height: 50px; 
-        padding: 10px 12px;  
+        padding: 10px;  
         text-align: center;
         border-radius: 5px; 
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.8);
+    }
+
+    .post_form_button:hover,
+    .cancel_post_button:hover,
+    .add_bev_button:hover,
+    .add_food_button:hover {
+        cursor: pointer;
     }
 
     .event_report{
@@ -273,10 +326,176 @@ body{
 
     .event_report p{
         margin: 5px 0 10px 5px; 
+        /* font-weight: bold; */
+    }
+
+    .event_report span {
+        font-weight: bold;
     }
 
     .report_contact{
         margin-bottom: 10px; 
+        text-align: center;
+    }
+
+    .report_invoice {
+        background-color: white;
+        border: 1px solid royalblue;
+    }
+
+    .invoice_order_head {
+        color: royalblue;
+        text-align: center;
+    }
+
+    .order_grouping {
+        width: 90%;
+        margin: 10px auto;
+        padding: 10px;
+        border-bottom: 1px solid green;
+    }
+
+    .order_li {
+        margin-top: 5px;
+    }
+
+    .total {
+        color: green;
+    }
+
+    .grouping_total{
+        font-weight: bold;
+        font-size: 18px;
+        padding: 4px; 
+        margin-left: 5px; 
+    }
+
+    .order_totals {
+        padding: 10px; 
+        margin-left: 8px; 
+    }
+
+    .total_li{
+        list-style: none;
+        font-size: 18px;
+        margin-top: 5px; 
+    }
+
+    .total_border {
+        border-bottom: 1px solid black;
+    }
+
+    .order_grand_total {
+        font-weight: bold;
+        font-size: 24px;
+    }
+
+    .update_delete_section { 
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .report_btn {
+        margin: 20px 0;
+        width: 80px;
+        height: 50px; 
+        padding: 10px;  
+        text-align: center;
+        border-radius: 5px; 
+        border: none;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.8);
+    }
+
+    .report_btn:hover {
+        cursor: pointer;
+    }
+
+    .js_update_button {
+        background-color: royalblue;
+    }
+
+    .js_delete_button {
+        background-color: red;
+    }
+
+    /* update form */
+    .update_form {
+        background-color: white;
+        padding: 10px; 
+        border: 1px solid royalblue;
+        border-radius: 5px; 
+        width: 85%;
+        margin: 0 auto;
+    }
+
+    .update_field {
+        border: none;
+    }
+
+    .update_field input {
+        display: block;
+        background-color: lightyellow;
+        margin: 5px auto 10px auto;
+        width: 70%;
+    }
+
+    .update_legend {
+        text-align: center;
+        color: royalblue;
+        font-weight: bold;
+        margin-top: 10px; 
+        font-size: 18px;
+    }
+
+    .update_order_btn{
+        margin-left: auto;
+    }
+
+    .update_field label {
+        display: block;
+    }
+
+    .update_border{
+        border-top: 1px solid black;
+        padding: 5px; 
+    }
+
+    .update_order_btn{
+        margin-left: 20px; 
+    }
+
+    .update_btns {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 30px; 
+        margin-bottom: 20px; 
+    }
+
+    .js_put_btn,
+    .cancel_update_btn {
+        width: 100px; 
+        border: none;
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px 2px black;
+    }
+
+    .js_put_btn:hover,
+    .cancel_update_btn:hover {
+        cursor: pointer;
+    }
+
+    .js_put_btn {
+        background-color: royalblue;
+    }
+
+    .cancel_update_btn {
+        background-color: red;
     }
 }
 
@@ -296,6 +515,7 @@ body{
         top: 0;
         left: 75vw; 
         height: 50px; 
+        transition: none;
     }
 
     .nav_list{
@@ -317,8 +537,8 @@ body{
     }
 
     .event_table_row{
-        width: 80%;
-        margin: 10px auto;
+        max-width: 85vw;
+        margin: 15px auto;
     }
 
     .row_list{
@@ -328,14 +548,137 @@ body{
         text-align: left;
     }
 
-    .row_list li {
-        width: 300px; 
+    .table_li {
+        width: 500px;
         font-size: 18px; 
+    }
+
+    .event_report_path {
+        width: 300px;
+        margin: 0; 
+    }
+
+    .table_li_icons {
+        width: 300px; 
+        position: relative;
+        right: 75px; 
     }
 
     .create_form {
         max-width: 65vw;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .form_heading{ 
+        font-size: 30px; 
+    }
+
+    .event_report_display { 
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    .report_invoice {
+        margin-top: 20px;
+    }
+
+    .report_invoice h2{
+        padding: 10px; 
+    }
+
+    .invoice_order_head { 
+        text-align: left;
+        margin: 10px 20px; 
+        border-bottom: 1px solid royalblue;
+    }
+
+    .order_grouping { 
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        text-align: left;
+    }
+
+    .order_li {
+        /* margin-right: 20px;  */
+        list-style: none;
+        width: 200px; 
+        text-align: left;
+    }
+
+    .item_name { 
+        width: 300px; 
+        text-align: left;
+    }
+
+    .grouping_total {
+        width: 87%;
+        text-align: right;
+        font-size: 24px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .order_totals {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 0;
+        margin: 0;
+    }
+
+    .total_li{
+        font-size: 22px;
+    }
+
+    .order_grand_total {
+        font-size: 34px; 
+        /* border-top: 1px solid black; */
+        margin: 10px 0;
+    }
+
+    .report_btn {
+        width: 200px; 
+    }
+
+    /*update form*/
+    .update_form{
+        max-width: 65vw;
+        margin-top: 30px; 
+        margin-bottom: 30px; 
+    }
+    
+    .update_field {
+        margin-top: 30px;
+    }
+
+    .update_field input {
+        height: 22px; 
+        font-size: 15px; 
+        padding: 5px; 
+    }
+
+    .update_field_gray {
+        background-color: lightgray;
+        padding: 10px; 
+    }
+
+    .update_field label {
+        margin: 10px 0px 5px 20px; 
+    }
+
+    .update_legend {
+        margin-top: 25px;
+        font-size: 20px;
+    }
+
+    .update_legend_padding {
+        padding-top: 40px; 
+    }
+
+    .update_border { 
+        padding-top: 10px; 
     }
 }

@@ -5,19 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>EZEvents Sign In</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" href="main.css" type="text/css">
 </head>
 <body>
     <div class="landing_container">
-        <nav class="banner" role="banner">
+        <!-- <nav class="banner" role="banner">
             <h1 class="header">EZ Events</h1>
-        </nav>
+        </nav> -->
+        <h1 class="main_header">EZ Events</h1>
         <div class="page_container">
-            <p class="landing_description">Easily add and track events</p>
+            <div class="icons_container">
+                <div class="icons">
+                    <p class="landing_description">Making Event Management EZ</p>
+                    <div class="icons_div">
+                        <p>Create Events</p>
+                        <div class="front_image">
+                            <span><i class="far fa-plus-square fa-3x"></i></span>
+                        </div>
+                    </div>
+                    <div class="icons_div icon2">
+                        <p>Manage Orders</p>
+                        <div class="front_image">
+                            <span><i class="fas fa-copy fa-3x"></i></span>
+                        </div>
+                    </div>
+                    <div class="icons_div icon3">
+                        <p>Update Invoices</p>
+                        <div class="front_image">
+                            <span class="money"><i class="fas fa-dollar-sign fa-3x"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <section class="login_container">
                 <form class="login_form" action="">
-                    <p class="login_error" hidden>Uh oh! Username or Password not recognized!</p>
                     <fieldset class="login_fields">
+                        <p class="login_error" hidden>Uh oh! Username or Password not recognized!</p>
                         <legend class="login_header">Login</legend>
                         <label for="login_username" class="login_label">Username:</label>
                         <input type="text" placeholder="ned123" id="login_username" class="login_input" aria-live="" required>
@@ -36,12 +60,15 @@
                         <label for="signup_lastName" class="login_label signup_label">Last Name:</label>
                         <input type="text" placeholder="Snow" id="signup_lastName" class="login_input signup_input" aria-live="" required>
                         <label for="signup_username" class="login_label signup_label">Username:</label>
+                        <p class="username_error" hidden>Username already exist!</p>
                         <input type="text" placeholder="whitewolf123" id="signup_username" class="login_input signup_input" aria-live="" required>
                         <label for="signup_password" class="login_label signup_label">Password:</label>
-                        <input type="text" placeholder="password" id="signup_password" class="login_input signup_input" aria-live="" required>
+                        <input type="password" placeholder="password" id="signup_password" class="login_input signup_input" aria-live="" required>
+                        <p class="password_info">Must be at least 8 characters</p>
                         <button type="submit" class="signup_button">Sign Up</button>
                     </fieldset>
                 </form>
+                <p class="register_p">Already a member? <a href="#" class="login_path">Login here</a></p>
             </section>
         </div>
     </div>

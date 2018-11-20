@@ -7,7 +7,8 @@ const jwt = require('jsonwebtoken');
 
 const {app, runServer, closeServer} = require('../server');
 const {User} = require('../user');
-const {JWT_SECRET, JWT_EXPIRY, TEST_DATABASE_URL} = require('../config');
+const {JWT_EXPIRY, TEST_DATABASE_URL} = require('../config');
+const JWT_SECRET = 'fizzbangbuzzboom';
 
 const expect = chai.expect;
 chai.use(chaiHttp);

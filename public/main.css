@@ -5,20 +5,10 @@
     font-family: sans-serif;
 }
 
-/* landing page */
-
-/* landing_container, signup_container {
-    display: flex;
-} */
-
-/* .login_form, .signup_form {
-    display: flex;
-} */
-
 body{
-    background-color: lightgoldenrodyellow;
-    /* background-image: linear-gradient(rgba(2, 42, 129, 0.2), rgba(9, 154, 221, 0.753)); */
     background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), url(https://cdn.pixabay.com/photo/2018/08/10/21/52/restaurant-3597677_960_720.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
 .main_header{
@@ -168,9 +158,6 @@ body{
         display: flex;
         justify-content: space-around;
     }
-    .banner{
-
-    }
 
     .icons_container {
         display: block;
@@ -241,8 +228,10 @@ body{
     }
 
     .singup_fields{
+        position: relative;
+        bottom: 15px; 
         width: 400px; 
-        height: 450px; 
+        height: 475px; 
         margin-top: 20px; 
     }
 
@@ -274,5 +263,10 @@ body{
         width: 300px; 
         height: 40px; 
         margin-top: 20px;  
+    }
+
+    .regist_p_relative {
+        position: relative;
+        bottom: 15px; 
     }
 }

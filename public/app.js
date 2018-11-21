@@ -1,5 +1,29 @@
 'use strict';
 
+//cache DOM//
+const $landingContainer = $('.landing_container');
+const $loginError = $landingContainer.find('.login_error');
+const $usernameError = $landingContainer.find('.username_error');
+const $loginUsername = $landingContainer.find('#login_username');
+const $loginPassword = $landingContainer.find('#login_password');
+const $loginForm = $landingContainer.find('.login_form');
+const $registPath = $landingContainer.find('.register_path');
+const $loginPath = $landingContainer.find('.login_path');
+const $loginContainer = $landingContainer.find('.login_container');
+const $signupContainer = $landingContainer.find('.signup_container');
+const $signupUsername = $landingContainer.find('#signup_username');
+const $signupPassword = $landingContainer.find('#signup_password');
+const $signupFirstName = $landingContainer.find('#signup_firstName');
+const $signupLastName = $landingContainer.find('#signup_lastName');
+const $passwordInfo = $landingContainer.find('.password_info');
+const $signupBtn = $landingContainer.find('.signup_button');
+
+//bind events//
+$loginForm.on('click', '.login_button', handleLoginSubmit);
+$registPath.click(handleRegisterClick);
+$loginPath.click(handleShowLoginClick);
+$signupBtn.click(watchSignupSubmit);
+
 function userLogin(_username, _password){
     const user = {
         username: _username,
@@ -17,40 +41,30 @@ function userLogin(_username, _password){
         window.location.href = 'events.html'
     })
     .fail(err => {
-        $('.login_error').prop('hidden', false);
-        $('#login_username').val('');
-        $('#login_password').val('');
+        $loginError.prop('hidden', false);
+        $loginUsername.val('');
+        $loginPassword.val('');
     });
 }
 
-function handleLoginSubmit(){
-    $('.login_form').on('submit', e => {
+function handleLoginSubmit(e) {
+    e.preventDefault();
+    const username = $loginUsername.val();
+    const password = $loginPassword.val();
+    console.log(username + ', ' + password );
+    userLogin(username, password);
+}
+
+function handleRegisterClick(e) {
+    e.preventDefault();
+    $loginContainer.prop('hidden', true);
+    $signupContainer.prop('hidden', false);
+}
+
+function handleShowLoginClick(e) {
         e.preventDefault();
-        const username = $('#login_username').val();
-        const password = $('#login_password').val();
-        userLogin(username, password);
-    });
-}
-
-function handleRegisterClick(){
-    $('.register_path').click(e => {
-        $('.login_container').prop('hidden', true);
-        $('.signup_container').prop('hidden', false);
-    })
-    watchSignupSubmit();
-}
-
-function handleShowLoginClick() {
-    $('.login_path').click(e => {
-        $('.signup_container').prop('hidden', true);
-        $('.login_container').prop('hidden', false);
-    })
-}
-
-handleShowLoginClick();
-
-function handleLoginClick(){
-
+        $signupContainer.prop('hidden', true);
+        $loginContainer.prop('hidden', false);
 }
 
 function registerUser(_username, _password, _firstName, _lastName){
@@ -67,37 +81,28 @@ function registerUser(_username, _password, _firstName, _lastName){
         method: 'POST'
     })
     .done(() => {
-        $('.login_container').prop('hidden', false);
-        $('.signup_container').prop('hidden', true);
+        $loginContainer.prop('hidden', false);
+        $signupContainer.prop('hidden', true);
     })
     .fail(err => {
         if(err.responseJSON.message === `username already exist`) {
-            $('.username_error').prop('hidden', false);
-            $('#signup_username').val('');
-            $('#signup_password').val('');
+            $usernameError.prop('hidden', false);
+            $signupUsername.val('');
+            $signupPassword.val('');
         }else if(err.responseJSON.location === `password`) {
-            $('#signup_username').val('');
-            $('#signup_password').val('');
-            $('.password_info').html('Too short! Try again.')
+            $signupUsername.val('');
+            $signupPassword.val('');
+            $passwordInfo.html('Too short! Try again.')
         }
         console.error(err);
     })
 }
 
-function watchSignupSubmit(){
-    $('.signup_button').on('click', e => {
+function watchSignupSubmit(e){
         e.preventDefault();
-        const username = $('#signup_username').val();
-        const password = $('#signup_password').val();
-        const firstName = $('#signup_firstName').val();
-        const lastName = $('#signup_lastName').val();
+        const username = $signupUsername.val();
+        const password = $signupPassword.val();
+        const firstName = $signupFirstName.val();
+        const lastName = $signupLastName.val();
         registerUser(username, password, firstName, lastName);
-    })
 }
-
-//function to watch submit for user
-
-$(function(){
-    handleLoginSubmit();
-    handleRegisterClick();
-})

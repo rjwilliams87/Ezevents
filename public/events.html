@@ -30,8 +30,8 @@
 
                 </div>
             </section>
-            <section class="create_form" aria-live="assertive" hidden>
-                <form class="new_event_form">
+            <section class="new_form_container" aria-live="assertive" hidden>
+                <form class="new_event_form" id="reset_anchor">
                     <h2 class="form_heading">Create New Event</h2>
                     <fieldset>
                         <legend>Contact Information</legend>
@@ -55,11 +55,11 @@
                         <legend>Food Order</legend>
                         <div class="food_order_input">
                             <label for="food_type" class="">Food Item:</label>
-                            <input type="text" class="food_type" name="" required>
+                            <input type="text" class="food_type" name="type" required>
                             <label for="food_cost">Cost Per Item:</label>
-                            <input type="number" class="food_cost" name="" required>
+                            <input type="number" class="food_cost" name="pricePerOrder" required>
                             <label for="food_quantity">Quantity</label>
-                            <input type="number" class="food_quantity" name="" required>
+                            <input type="number" class="food_quantity" name="quantity" required>
                         </div>
                         <button class="add_food_button">Add To Order</button>
                     </fieldset>
@@ -67,11 +67,11 @@
                             <legend>Beverage Order</legend>
                             <div class="bev_order_input">
                                 <label for="bev_type" class="">Beverage Item:</label>
-                                <input type="text" class="bev_type" required>
+                                <input type="text" class="bev_type" name="type" required>
                                 <label for="bev_cost">Cost Per Item:</label>
-                                <input type="number" class="bev_cost" required>
+                                <input type="number" class="bev_cost" name="pricePerOrder" required>
                                 <label for="bev_quantity">Quantity</label>
-                                <input type="number" class="bev_quantity" required>
+                                <input type="number" class="bev_quantity" name="quantity" required>
                             </div>
                             <button class="add_bev_button">Add To Order</button>
                     </fieldset>
@@ -80,7 +80,7 @@
                         <label for="event_rental_price">Rental Price:</label>
                         <input type="number" id="event_rental_price" required>
                     </fieldset>
-                    <div class="create_form_buttons">
+                    <div class="new_form_container_buttons">
                         <button type="submit" class="post_form_button">Create</button>
                         <button class="cancel_post_button">Cancel</button>
                     </div>  

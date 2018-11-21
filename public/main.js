@@ -1,27 +1,45 @@
 'use strict';
 
 //cache DOM
-const $homeBtn = $('#home_btn');
-const $logoutBtn = $('#logout_btn');
-const $main = $('main');
-const $showFormBtn = $main.find('.js_create_event_button');
-const $createForm = $main.find('.create_form');
-const $eventsList = $main.find('.events_list');
-const $updateIcon = $('.icon_update');
-const $newEventForm = $main.find('.new_event_form');
-const $foodInput = $('.food_order_input');
-const $bevInput = $main.find('.bev_order_input');
-const $eventTable = $main.find('.event_table');
-const $eventReport = $('.event_report');
-const $updateDeleteContainer = $eventReport.find('.update_delete_section');
-const $reportContainer = $eventReport.find('.event_report_display');
-const $updateEventForm = $eventReport.find('.update_form');
-const $header = $('header');
+const $htmlWrapper = $('#wrapper');
+
+    //menu variables//
+const $header = $htmlWrapper.find('header');
+const $homeBtn = $header.find('#home_btn');
+const $logoutBtn = $header.find('#logout_btn');
 const $nav = $header.find('nav');
 const $menuToggler = $header.find('.menu_toggle');
-// const $updateDeleteContainer = $('.update_delete_section');
 
-//bind events
+    //main, events_display, event_table variables
+const $main = $htmlWrapper.find('main');
+const $showFormBtn = $main.find('.js_create_event_button');
+const $eventTable = $main.find('.event_table');
+const $eventsList = $main.find('.events_list');
+
+    //create form variables//
+const $resetAnchor = $htmlWrapper.find('#reset_anchor');
+const $formContainer = $htmlWrapper.find('.new_form_container');
+const $newEventForm = $formContainer.find('.new_event_form');
+const $formTimeInput = $formContainer.find('#event_time');
+const $formDateInput = $formContainer.find('#event_date');
+const $formFirstNameInput = $formContainer.find('#contact_firstName');
+const $formLastNameInput = $formContainer.find('#contact_lastName');
+const $formEmailInput = $formContainer.find('#contact_email');
+const $formPhoneInput = $formContainer.find('#contact_phone');
+const $formRentalInput = $formContainer.find('#event_rental_price');
+const $foodInput = $htmlWrapper.find('.food_order_input');
+const $bevInput = $htmlWrapper.find('.bev_order_input');
+
+    //event_report variables//
+const $eventReport = $htmlWrapper.find('.event_report');
+const $updateDeleteContainer = $('.update_delete_section');
+const $reportContainer = $eventReport.find('.event_report_display');
+const $updateEventForm = $htmlWrapper.find('.update_form');
+const $reportBtn = $('.report_btn');
+const $addedUpdateBevInput = $('.bev_order_input2');
+const $addedUpdatedFoodInput = $('.food_order_input2');
+
+//bind events//
 $homeBtn.on('click', refreshEventsPage);
 $logoutBtn.on('click', logout);
 // $main.on('click', '.icon_update', displayUpdateForm);
@@ -37,9 +55,11 @@ $eventReport.on('submit', handleUpdateSubmit);
 $eventReport.on('click', '.cancel_update_btn', refreshEventsPage);
 $eventReport.on('click', '.js_delete_button', handleDeleteButton);
 $main.on('click', '.icon_delete', handleDeleteButton);
-$createForm.on('submit', handleCreateButton);
-$createForm.on('click', '.cancel_post_button', refreshEventsPage);
+$formContainer.on('submit', handleCreateButton);
+$formContainer.on('click', '.cancel_post_button', refreshEventsPage);
 // $eventReport.on('click', '.cancel_update_btn', refreshEventsPage);
+$eventReport.on('click', '.add_food_button', addFoodtoUpdateForm);
+$eventReport.on('click', '.add_bev_button', addBevToUpdateForm);
 
 function logout(e) {
     e.preventDefault();
@@ -136,7 +156,7 @@ function renderEventRow(data) {
 
 function getAndDisplayEventTable() {
     $eventTable.html('');
-    displayNone([$eventReport, $updateEventForm, $createForm]);
+    displayNone([$eventReport, $updateEventForm, $formContainer]);
     displayElements([$main, $eventsList, $eventTable]);
     fetch('/api/events', 'GET', displayAllEvents);
 }
@@ -210,8 +230,8 @@ function generateEventReport(data) {
 
 function displayCreateEventForm(e) {
     e.preventDefault();
-    $createForm.prop('hidden', false);
-    $createForm.show();
+    $formContainer.prop('hidden', false);
+    $formContainer.show();
     $eventsList.hide();
 }
 
@@ -220,11 +240,11 @@ function addFoodInputFields(e) {
     //if id neccessary for accessibility add counter and use for id/labels
     $foodInput.append(`
         <label class="added_food_input">Food Item:</label>
-        <input type="text" class="food_type">
+        <input type="text" class="food_type" name="type">
         <label>Cost Per Item:</label>
-        <input type="number" class="food_cost">
+        <input type="number" class="food_cost" name="pricePerOrder">
         <label>Quantity</label>
-        <input type="number" class="food_quantity">
+        <input type="number" class="food_quantity" name="quantity">
     `);
 }
 
@@ -232,11 +252,11 @@ function addBevInputFields(e) {
     e.preventDefault();
     $bevInput.append(`
     <label class="added_bev_input">Beverage Item:</label>
-    <input type="text" class="bev_type">
+    <input type="text" class="bev_type" name="type">
     <label for="item_cost">Cost Per Item:</label>
-    <input type="number" id="item_cost" class="bev_cost">
+    <input type="number" id="item_cost" class="bev_cost" name="pricePerOrder">
     <label for="bev_quantity">Quantity</label>
-    <input type="number" class="bev_quantity">
+    <input type="number" class="bev_quantity" name="quantity">
     `);
 }
 
@@ -252,18 +272,15 @@ function getAndDisplayEventReport(e) {
 function displayUpdateForm(e) {
     e.preventDefault();
     const id = $(this).attr('id').match(/[a-zA-Z0-9]/g).join('');
-    hideElements([$('.event_report_display'), $('.update_delete_section'), $('.report_btn')]);
+    hideElements([$('.event_report_display'), $('.update_delete_section'), $('.report_btn') ]);
+    // hideElements([$reportContainer, $updateDeleteContainer, $reportBtn]);
+    // $reportContainer.hide();
     showElements([$updateEventForm, $('.update_form')]);
     fetch(`/api/events/${id}`, 'GET', renderUpdateForm);
 }
 
 function renderUpdateForm(data) {
     const {id, contact, date, time, order} = data;
-    // const eventDate = new Date(date);
-    // const day = eventDate.getDay();
-    // const month = eventDate.getMonth();
-    // const year = eventDate.getFullYear();
-    // console.log(`value = ${year}-${month}-${day}`);
     $('.update_form').html(
         `
         <form class="update_event_form">
@@ -291,11 +308,11 @@ function renderUpdateForm(data) {
             <div class="food_order_input2">
                 ${order.food.map(item => {return `
                     <label for="update_food_item" class="update_border">Food Item:</label>
-                    <input type="text" id="${item._id}" class="food_type" value="${item.type}">
+                    <input type="text" id="${item._id}" class="food_type" value="${item.type}" name="type">
                     <label for="update_food_cost">Cost Per Item:</label>
-                    <input type="number" id="update_food_cost" class="food_cost" value="${item.pricePerOrder}">
+                    <input type="number" id="update_food_cost" class="food_cost" value="${item.pricePerOrder}" name="pricePerOrder">
                     <label for="update_food_quantity">Quantity</label>
-                    <input type="number" id="update_food_quantity" class="food_quantity" value="${item.quantity}">`
+                    <input type="number" id="update_food_quantity" class="food_quantity" value="${item.quantity}" name="quantity">`
                 }).join('')}
             </div>
             <button class="add_food_button update_order_btn">Add More Food</button>
@@ -305,11 +322,11 @@ function renderUpdateForm(data) {
                 <div class="bev_order_input2">
                     ${order.beverages.map(item => {return `
                     <label for="update_bev_item" class="update_border">Beverage Item:</label>
-                    <input type="text" id="${item._id}" class="bev_type" value="${item.type}">
+                    <input type="text" id="${item._id}" class="bev_type" value="${item.type}" name="type">
                     <label for="update_bev_cost">Cost Per Item:</label>
-                    <input type="number" id="update_bev_cost" class="bev_cost" value="${item.pricePerOrder}">
+                    <input type="number" id="update_bev_cost" class="bev_cost" value="${item.pricePerOrder}" name="pricePerOrder">
                     <label for="update_bev_quantity">Quantity</label>
-                    <input type="number" id="update_bev_quantity" class="bev_quantity" value="${item.quantity}">`
+                    <input type="number" id="update_bev_quantity" class="bev_quantity" value="${item.quantity}" name="quantity">`
                 }).join('')}
                 </div>
                 <button class="add_bev_button update_order_btn">Add More Beverages</button>
@@ -327,39 +344,30 @@ function renderUpdateForm(data) {
         `
     );
 }
-//refactor this funciton after get working
-function addFoodtoUpdateForm() {
-    $eventReport.on('click', '.add_food_button', e => {
+
+function addFoodtoUpdateForm(e) {
         e.preventDefault();
-        // console.log('Yay! you clicked me!')
-        // const foodDiv = $(this).find($('.food_order_input'));
         $('.food_order_input2').append(`
         <label class="added_food_input">Food Item:</label>
-        <input type="text" class="food_type">
+        <input type="text" class="food_type" name="type">
         <label>Cost Per Item:</label>
-        <input type="number" class="food_cost">
+        <input type="number" class="food_cost" name="pricePerOrder">
         <label>Quantity</label>
-        <input type="number" class="food_quantity">
-        `)
-    });
+        <input type="number" class="food_quantity" name="quantity">
+        `);
 }
 
-function addBevToUpdateForm() {
-    $eventReport.on('click', '.add_bev_button', e => {
+function addBevToUpdateForm(e) {
         e.preventDefault();
         $('.bev_order_input2').append(`
         <label class="added_bev_input">Beverage Item:</label>
-        <input type="text" class="bev_type">
+        <input type="text" class="bev_type" name="type">
         <label>Cost Per Item:</label>
-        <input type="number" class="bev_cost">
+        <input type="number" class="bev_cost" name="pricePerOrder">
         <label>Quantity</label>
-        <input type="number" class="bev_quantity">
+        <input type="number" class="bev_quantity" name="quantity">
         `)
-    })
 }
-
-addFoodtoUpdateForm();
-addBevToUpdateForm();
 
 //creates objects array used for PUT and POST request
 function createOrderObjects () {
@@ -446,25 +454,22 @@ function handleCreateButton(e) {
     const order = createOrderObjects();
     const eventInfo = {
         contact: {
-            firstName: $('#contact_firstName').val(),
-            lastName: $('#contact_lastName').val(),
-            email: $('#contact_email').val(),
-            phone: $('#contact_phone').val()
+            firstName: $formFirstNameInput.val(),
+            lastName: $formLastNameInput.val(),
+            email: $formEmailInput.val(),
+            phone: $formPhoneInput.val()
         },
-        date: new Date($('#event_date').val()),
-        time: $('#event_time').val(),
+        date: new Date($formDateInput.val()),
+        time: $formTimeInput.val(),
         order: {
             food: order.foodObjs,
             beverages: order.bevObjs,
-            rentalPrice: $('#event_rental_price').val()
+            rentalPrice: $formRentalInput.val()
         }
     };
     fetch('/api/events', 'POST', refreshEventsPage, eventInfo);
 
-    clearValues([$('#contact_firstName'),$('#contact_lastName'),$('#contact_email'),$('#contact_phone'), $('#event_date'), 
-    $('#event_time') ,$('.food_type'), $('.food_cost'), $('.food_quantity'), $('.bev_type'), $('.bev_cost'), $('.bev_quantity'), 
-    $('#event_rental_price')]);
+    $resetAnchor[0].reset();
 }
 
 getAndDisplayEventTable();
-

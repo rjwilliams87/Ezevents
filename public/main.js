@@ -120,6 +120,7 @@ function hideElements(elements) {
 }
 
 function refreshEventsPage() {
+    $resetAnchor[0].reset();
     $eventTable.html('');
     getAndDisplayEventTable();
 }
@@ -239,24 +240,28 @@ function addFoodInputFields(e) {
     e.preventDefault();
     //if id neccessary for accessibility add counter and use for id/labels
     $foodInput.append(`
-        <label class="added_food_input">Food Item:</label>
-        <input type="text" class="food_type" name="type">
-        <label>Cost Per Item:</label>
-        <input type="number" class="food_cost" name="pricePerOrder">
-        <label>Quantity</label>
-        <input type="number" class="food_quantity" name="quantity">
+        <div class="food_input_group">
+            <label class="added_food_input">Food Item:</label>
+            <input type="text" class="food_type" name="type">
+            <label>Cost Per Item:</label>
+            <input type="number" class="food_cost" name="pricePerOrder">
+            <label>Quantity</label>
+            <input type="number" class="food_quantity" name="quantity">
+        </div>
     `);
 }
 
 function addBevInputFields(e) {
     e.preventDefault();
     $bevInput.append(`
-    <label class="added_bev_input">Beverage Item:</label>
-    <input type="text" class="bev_type" name="type">
-    <label for="item_cost">Cost Per Item:</label>
-    <input type="number" id="item_cost" class="bev_cost" name="pricePerOrder">
-    <label for="bev_quantity">Quantity</label>
-    <input type="number" class="bev_quantity" name="quantity">
+    <div class="bev_input_group">
+        <label class="added_bev_input">Beverage Item:</label>
+        <input type="text" class="bev_type" name="type">
+        <label for="item_cost">Cost Per Item:</label>
+        <input type="number" id="item_cost" class="bev_cost" name="pricePerOrder">
+        <label for="bev_quantity">Quantity</label>
+        <input type="number" class="bev_quantity" name="quantity">
+    </div>
     `);
 }
 
@@ -307,12 +312,15 @@ function renderUpdateForm(data) {
             <legend class="update_legend update_legend_border">Food Order</legend>
             <div class="food_order_input2">
                 ${order.food.map(item => {return `
-                    <label for="update_food_item" class="update_border">Food Item:</label>
-                    <input type="text" id="${item._id}" class="food_type" value="${item.type}" name="type">
-                    <label for="update_food_cost">Cost Per Item:</label>
-                    <input type="number" id="update_food_cost" class="food_cost" value="${item.pricePerOrder}" name="pricePerOrder">
-                    <label for="update_food_quantity">Quantity</label>
-                    <input type="number" id="update_food_quantity" class="food_quantity" value="${item.quantity}" name="quantity">`
+                    <div class="food_input_group">
+                        <label for="update_food_item" class="update_border">Food Item:</label>
+                        <input type="text" id="${item._id}" class="food_type" value="${item.type}" name="type">
+                        <label for="update_food_cost">Cost Per Item:</label>
+                        <input type="number" id="update_food_cost" class="food_cost" value="${item.pricePerOrder}" name="pricePerOrder">
+                        <label for="update_food_quantity">Quantity</label>
+                        <input type="number" id="update_food_quantity" class="food_quantity" value="${item.quantity}" name="quantity">
+                    </div>
+                    `
                 }).join('')}
             </div>
             <button class="add_food_button update_order_btn">Add More Food</button>
@@ -321,12 +329,15 @@ function renderUpdateForm(data) {
                 <legend class="update_legend update_legend_padding">Beverage Order</legend>
                 <div class="bev_order_input2">
                     ${order.beverages.map(item => {return `
-                    <label for="update_bev_item" class="update_border">Beverage Item:</label>
-                    <input type="text" id="${item._id}" class="bev_type" value="${item.type}" name="type">
-                    <label for="update_bev_cost">Cost Per Item:</label>
-                    <input type="number" id="update_bev_cost" class="bev_cost" value="${item.pricePerOrder}" name="pricePerOrder">
-                    <label for="update_bev_quantity">Quantity</label>
-                    <input type="number" id="update_bev_quantity" class="bev_quantity" value="${item.quantity}" name="quantity">`
+                    <div class="bev_input_group">
+                        <label for="update_bev_item" class="update_border">Beverage Item:</label>
+                        <input type="text" id="${item._id}" class="bev_type" value="${item.type}" name="type">
+                        <label for="update_bev_cost">Cost Per Item:</label>
+                        <input type="number" id="update_bev_cost" class="bev_cost" value="${item.pricePerOrder}" name="pricePerOrder">
+                        <label for="update_bev_quantity">Quantity</label>
+                        <input type="number" id="update_bev_quantity" class="bev_quantity" value="${item.quantity}" name="quantity">
+                    </div>
+                    `
                 }).join('')}
                 </div>
                 <button class="add_bev_button update_order_btn">Add More Beverages</button>
@@ -348,79 +359,108 @@ function renderUpdateForm(data) {
 function addFoodtoUpdateForm(e) {
         e.preventDefault();
         $('.food_order_input2').append(`
-        <label class="added_food_input">Food Item:</label>
-        <input type="text" class="food_type" name="type">
-        <label>Cost Per Item:</label>
-        <input type="number" class="food_cost" name="pricePerOrder">
-        <label>Quantity</label>
-        <input type="number" class="food_quantity" name="quantity">
+        <div class="food_input_group">
+            <label class="added_food_input">Food Item:</label>
+            <input type="text" class="food_type" name="type">
+            <label>Cost Per Item:</label>
+            <input type="number" class="food_cost" name="pricePerOrder">
+            <label>Quantity</label>
+            <input type="number" class="food_quantity" name="quantity">
+        </div>
         `);
 }
 
 function addBevToUpdateForm(e) {
         e.preventDefault();
         $('.bev_order_input2').append(`
-        <label class="added_bev_input">Beverage Item:</label>
-        <input type="text" class="bev_type" name="type">
-        <label>Cost Per Item:</label>
-        <input type="number" class="bev_cost" name="pricePerOrder">
-        <label>Quantity</label>
-        <input type="number" class="bev_quantity" name="quantity">
+        <div class="bev_input_group">
+            <label class="added_bev_input">Beverage Item:</label>
+            <input type="text" class="bev_type" name="type">
+            <label>Cost Per Item:</label>
+            <input type="number" class="bev_cost" name="pricePerOrder">
+            <label>Quantity</label>
+            <input type="number" class="bev_quantity" name="quantity">
+        </div>
         `)
 }
 
 //creates objects array used for PUT and POST request
-function createOrderObjects () {
-    let foodObjs = [];
-    let bevObjs = [];
+// function createOrderObjects () {
+//     let foodObjs = [];
+//     let bevObjs = [];
 
-    const foodTypes = document.getElementsByClassName('food_type');
-    const foodCost = document.getElementsByClassName('food_cost');
-    const foodQuantity = document.getElementsByClassName('food_quantity');
+//     const foodTypes = document.getElementsByClassName('food_type');
+//     const foodCost = document.getElementsByClassName('food_cost');
+//     const foodQuantity = document.getElementsByClassName('food_quantity');
 
-    for (let i = 0; i < foodTypes.length; i++){
-        let obj = {};
-        if (foodTypes[i].id) {
-            obj._id = foodTypes[i].id;
-        }
-        obj.type = foodTypes[i].value;
-        obj.pricePerOrder = foodCost[i].value;
-        obj.quantity = foodQuantity[i].value;
+//     for (let i = 0; i < foodTypes.length; i++){
+//         let obj = {};
+//         if (foodTypes[i].id) {
+//             obj._id = foodTypes[i].id;
+//         }
+//         obj.type = foodTypes[i].value;
+//         obj.pricePerOrder = foodCost[i].value;
+//         obj.quantity = foodQuantity[i].value;
         
-        if (obj.pricePerOrder === '' || obj.quantity === '') {
-            continue;
-        }else {
-            foodObjs.push(obj);
-        }
-    }
+//         if (obj.pricePerOrder === '' || obj.quantity === '') {
+//             continue;
+//         }else {
+//             foodObjs.push(obj);
+//         }
+//     }
 
-    const bevTypes = document.getElementsByClassName('bev_type');
-    const bevCost = document.getElementsByClassName('bev_cost');
-    const bevQuantity = document.getElementsByClassName('bev_quantity');
-    for (let i = 0; i < bevTypes.length; i++){
-        let obj = {};
-        if (bevTypes[i].id) {
-            obj._id = bevTypes[i].id;
-        }
-        obj.type = bevTypes[i].value;
-        obj.pricePerOrder = bevCost[i].value;
-        obj.quantity = bevQuantity[i].value;
+//     const bevTypes = document.getElementsByClassName('bev_type');
+//     const bevCost = document.getElementsByClassName('bev_cost');
+//     const bevQuantity = document.getElementsByClassName('bev_quantity');
+//     for (let i = 0; i < bevTypes.length; i++){
+//         let obj = {};
+//         if (bevTypes[i].id) {
+//             obj._id = bevTypes[i].id;
+//         }
+//         obj.type = bevTypes[i].value;
+//         obj.pricePerOrder = bevCost[i].value;
+//         obj.quantity = bevQuantity[i].value;
         
-        if (obj.pricePerOrder === '' || obj.quantity === '') {
-            continue;
-        }else {
-            bevObjs.push(obj);
-        }
-    }
-    return {
-        foodObjs,
-        bevObjs
-    }
-}
+//         if (obj.pricePerOrder === '' || obj.quantity === '') {
+//             continue;
+//         }else {
+//             bevObjs.push(obj);
+//         }
+//     }
+//     return {
+//         foodObjs,
+//         bevObjs
+//     }
+// }
 
 function handleUpdateSubmit(e) {
     e.preventDefault();
-    const order = createOrderObjects();
+    // const order = createOrderObjects();
+    let foodObjs = [];
+    let bevObjs = [];
+
+    $(this).find('.food_input_group').each(function() {
+        const inputs = $(this).find('input');
+        const object = {};
+        Object.values(inputs).forEach(input => {
+            if (input.localName === 'input' && input.value !== "") {
+                object[input.name] = input.value
+            }
+        });
+        foodObjs.push(object);
+    });
+    
+    $(this).find('.bev_input_group').each(function() {
+        const inputs = $(this).find('input');
+        const object = {};
+        Object.values(inputs).forEach(input => {
+            if (input.localName === 'input' && input.value !== "") {
+                object[input.name] = input.value
+            }
+        });
+        bevObjs.push(object);
+    });
+
     const id = $('.js_put_btn').attr('id');
     const eventInfo = {
         id: id,
@@ -433,12 +473,12 @@ function handleUpdateSubmit(e) {
         date: new Date($('#update_date').val()),
         time: $('#update_time').val(),
         order: {
-            food: order.foodObjs,
-            beverages: order.bevObjs,
+            food: foodObjs,
+            beverages: bevObjs,
             rentalPrice: $('#update_rental_price').val()
         }
     }
-    console.log(order.foodObjs);
+    // console.log(order.foodObjs);
     fetch(`/api/events/${id}`, 'PUT', getAndDisplayEventTable, eventInfo);
 }
 
@@ -451,7 +491,32 @@ function handleDeleteButton(e) {
 
 function handleCreateButton(e) {
     e.preventDefault();
-    const order = createOrderObjects();
+    // const order = createOrderObjects();
+    let foodObjs = [];
+    let bevObjs = [];
+
+    $(this).find('.food_input_group').each(function() {
+        const inputs = $(this).find('input');
+        const object = {};
+        Object.values(inputs).forEach(input => {
+            if (input.localName === 'input' && input.value !== "") {
+                object[input.name] = input.value
+            }
+        });
+        foodObjs.push(object);
+    });
+    
+    $(this).find('.bev_input_group').each(function() {
+        const inputs = $(this).find('input');
+        const object = {};
+        Object.values(inputs).forEach(input => {
+            if (input.localName === 'input' && input.value !== "") {
+                object[input.name] = input.value
+            }
+        });
+        bevObjs.push(object);
+    });
+
     const eventInfo = {
         contact: {
             firstName: $formFirstNameInput.val(),
@@ -462,8 +527,8 @@ function handleCreateButton(e) {
         date: new Date($formDateInput.val()),
         time: $formTimeInput.val(),
         order: {
-            food: order.foodObjs,
-            beverages: order.bevObjs,
+            food: foodObjs,
+            beverages: bevObjs,
             rentalPrice: $formRentalInput.val()
         }
     };

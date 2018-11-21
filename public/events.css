@@ -244,8 +244,14 @@ body{
         background-color: lightyellow;
     }
 
-    .food_order_input,
+    /* .food_order_input,
     .bev_order_input{
+        display: flex;
+        flex-direction: column;
+    } */
+
+    .food_input_group,
+    .bev_input_group {
         display: flex;
         flex-direction: column;
     }
@@ -257,22 +263,23 @@ body{
         padding: 5px; 
     }
 
-    .add_food_button,
+    /* .add_food_button,
     .add_bev_button {
-        margin: 10px 0;
+        margin: 10px auto;
         padding: 8px; 
         height: 35px; 
-    }
+    } */
 
     .add_food_button,
     .add_bev_button {
+        height: 35px;
         background-color: rgb(31, 182, 31); 
         color: white;
         font-weight: bold;
         padding: 8px; 
         border: none;
         border-radius: 5px; 
-        margin: 25px auto 10px auto;
+        margin: 25px auto;
     }
 
     .new_form_container_buttons{

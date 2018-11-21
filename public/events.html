@@ -51,9 +51,9 @@
                         <label for="event_time">Time:</label>
                         <input type="time" id="event_time">
                     </fieldset>
-                    <fieldset>
+                    <fieldset class="food_order_input">
                         <legend>Food Order</legend>
-                        <div class="food_order_input">
+                        <div class="food_input_group">
                             <label for="food_type" class="">Food Item:</label>
                             <input type="text" class="food_type" name="type" required>
                             <label for="food_cost">Cost Per Item:</label>
@@ -61,11 +61,11 @@
                             <label for="food_quantity">Quantity</label>
                             <input type="number" class="food_quantity" name="quantity" required>
                         </div>
-                        <button class="add_food_button">Add To Order</button>
                     </fieldset>
-                    <fieldset>
+                    <button class="add_food_button">Add Food</button>
+                    <fieldset class="bev_order_input">
                             <legend>Beverage Order</legend>
-                            <div class="bev_order_input">
+                            <div class="bev_input_group">
                                 <label for="bev_type" class="">Beverage Item:</label>
                                 <input type="text" class="bev_type" name="type" required>
                                 <label for="bev_cost">Cost Per Item:</label>
@@ -73,8 +73,8 @@
                                 <label for="bev_quantity">Quantity</label>
                                 <input type="number" class="bev_quantity" name="quantity" required>
                             </div>
-                            <button class="add_bev_button">Add To Order</button>
                     </fieldset>
+                    <button class="add_bev_button">Add Beverage</button>
                     <fieldset>
                         <legend>Room and Equipment Rental</legend>
                         <label for="event_rental_price">Rental Price:</label>

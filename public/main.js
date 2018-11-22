@@ -132,31 +132,41 @@ function displayAllEvents(data) {
     }
 }
 
+function renderTableHeading() {
+    $('.event_table').html(`
+    <tr>
+        <th>Invoice</th>
+        <th>Contact</th>
+        <th>Event Date</th>
+        <th>Total</th>
+    </tr>
+    `)
+}
+
 function renderEventRow(data) {
     const {id, contact, date, order} = data;
     let foodTotalCost = order.food.map((index)=> index.pricePerOrder * index.quantity).reduce((a, b) => {return a+b});
     let bevTotalCost = order.beverages.map((index)=> index.pricePerOrder * index.quantity).reduce((a, b) => {return a+b});
     let totalCost = foodTotalCost + bevTotalCost + order.rentalPrice;
     const eventDate = date.replace(/T.*$/,"");
-    $eventTable.append(
+    $('.event_table').append(
         `
-        <div class="event_table_row">
-            <ul class="row_list">
-                <li class="event_report_path table_li"><a href="#" id="${id}" class="event_id">Invoice</a></li>
-                <li class="table_li"><span class="row_list_category">Contact:</span> ${contact.lastName}, ${contact.firstName}</li>
-                <li class="table_li"><span class="row_list_category">Date:</span> ${eventDate}</li>
-                <li class="table_li"><span class="row_list_category">Total Cost:</span> $${totalCost}</li>
-                <li class="table_li table_li_icons">
-                    <a id="_${id}_" class="icon icon_delete"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
-                </li>
-            <ul>
-        </div>
+            <tr class="table_row">
+                <td class="event_report_path table_td"><a href="#" id="${id}" class="event_id">View Invoice</a></td>
+                <td class="table_td"><span class="row_list_category"></span> ${contact.lastName}, ${contact.firstName}</td>
+                <td class="table_td"><span class="row_list_category"></span> ${eventDate}</td>
+                <td class="table_td"><span class="row_list_category"></span> $${totalCost}</td>
+            </tr>
         `
     );
 }
 
+{/* <td class="table_td table_td_icons">
+<a id="_${id}_" class="icon icon_delete"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+</td> */}
+
 function getAndDisplayEventTable() {
-    $eventTable.html('');
+    renderTableHeading();
     displayNone([$eventReport, $updateEventForm, $formContainer]);
     displayElements([$main, $eventsList, $eventTable]);
     fetch('/api/events', 'GET', displayAllEvents);
@@ -175,47 +185,40 @@ function generateEventReport(data) {
         `
         <div class="event_report_display">
             <div class="report_contact">
-                <h2>Contact Information</h2>
-                <p>Name: ${contact.firstName} ${contact.lastName}</p>
+                <p>Invoice For: ${contact.firstName} ${contact.lastName}</p>
                 <p>email: ${contact.email}</p>
                 <p>phone: ${contact.phone}</p>
             </div>
             <div class="report_invoice">
-                <h2>Invoice</h2>
-                <h3 class="invoice_order_head">Food Order</h3>
-                ${order.food.map(item => {return `
-                <div class="">
-                    <ul class="order_grouping">
-                        <li class="item_name order_li"><span class="item_name">Item:</span> ${item.type}</li>
-                        <li class="order_li"><span>Cost per item:</span> ${item.pricePerOrder}</li>
-                        <li class="order_li"><span>Quantity:</span> ${item.quantity}</li>
-                        <li class="order_li"><span>Order Price:</span> $${JSON.parse(item.pricePerOrder) * JSON.parse(item.quantity)}</li>
-                    </ul>
+                <div class="invoice_order">
+                    <h3 class="invoice_order_head">Food</h3>
+                    ${order.food.map(item => {return `
+                    <div class="">
+                        <ul class="order_grouping">
+                            <li class="item_name order_li"><span class="item_name">Item:</span> ${item.type}</li>
+                            <li class="order_li"><span>Cost per item:</span> ${item.pricePerOrder}</li>
+                            <li class="order_li"><span>Quantity:</span> ${item.quantity}</li>
+                            <li class="order_li"><span>Order Price:</span> $${JSON.parse(item.pricePerOrder) * JSON.parse(item.quantity)}</li>
+                        </ul>
+                    </div>
+                    `}).join('')}
+                    <h3 class="invoice_order_head">Beverages</h3>
+                    ${order.beverages.map(item => {return `
+                    <div class="">
+                        <ul class="order_grouping">
+                            <li class="item_name order_li"><span>Item:</span> ${item.type}</li>
+                            <li class="order_li"><span>Cost per item:</span> ${item.pricePerOrder}</li>
+                            <li class="order_li"><span>Quantity:</span> ${item.quantity}</li>
+                            <li class="order_li"><span>Order Price:</span> $${JSON.parse(item.pricePerOrder) * JSON.parse(item.quantity)}</li>
+                        </ul>
+                    </div>
+                    `}).join('')}
                 </div>
-                `}).join('')}
-                <div class="grouping_total">
-                    <p>Food Total: <span class="total">$${foodTotalCost}</span></p>
-                </div>
-                <h3 class="invoice_order_head">Beverage Order</h3>
-                ${order.beverages.map(item => {return `
-                <div class="">
-                    <ul class="order_grouping">
-                        <li class="item_name order_li"><span>Item:</span> ${item.type}</li>
-                        <li class="order_li"><span>Cost per item:</span> ${item.pricePerOrder}</li>
-                        <li class="order_li"><span>Quantity:</span> ${item.quantity}</li>
-                        <li class="order_li"><span>Order Price:</span> $${JSON.parse(item.pricePerOrder) * JSON.parse(item.quantity)}</li>
-                    </ul>
-                </div>
-                `}).join('')}
-                <div class="grouping_total">
-                    <p>Beverage Total: <span class="total">$${bevTotalCost}</span></p>
-                </div>
-                <h3 class="invoice_order_head">Invoice Total</h3>
                 <ul class="order_totals">
                     <li class="total_li">Food Total: <span class="total">$${foodTotalCost}</span></li>
                     <li class="total_li">Beverage Total: <span class="total">$${bevTotalCost}</span></li>
                     <li class="total_li total_border">Rental Price: <span class="total">$${order.rentalPrice}</span></li>
-                    <li class="order_grand_total total_li">Total: <span class="total">$${totalCost}</span></li>
+                    <li class="order_grand_total total_li">Amount Due: <span class="total">$${totalCost}</span></li>
                 </ul>
             </div>
         </div>
@@ -323,7 +326,7 @@ function renderUpdateForm(data) {
                     `
                 }).join('')}
             </div>
-            <button class="add_food_button update_order_btn">Add More Food</button>
+            <button class="add_food_button update_order_btn">Add Food</button>
         </fieldset>
         <fieldset class="update_field update_field_gray">
                 <legend class="update_legend update_legend_padding">Beverage Order</legend>
@@ -340,7 +343,7 @@ function renderUpdateForm(data) {
                     `
                 }).join('')}
                 </div>
-                <button class="add_bev_button update_order_btn">Add More Beverages</button>
+                <button class="add_bev_button update_order_btn">Add Beverage</button>
         </fieldset>
         <fieldset class="update_field">
             <legend class="update_legend">Room and Equipment Rental</legend>

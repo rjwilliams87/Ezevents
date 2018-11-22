@@ -23,13 +23,6 @@ body{
     /* margin-top: 50px; */
 }
 
-.header{
-    color: white;
-    padding: 20px; 
-    width: 100vw;
-    background-color: #5BC0EB;
-}
-
 .icons_container {
     display: none;
 }
@@ -48,9 +41,6 @@ body{
 
 .login_container {
     margin-top: 20px; 
-}
-
-.login_form{
 }
 
 .login_header{
@@ -108,9 +98,14 @@ body{
     width: 60vw;
     height: 4.5vh;
     margin: 3.5vh auto; 
-    background-color: green;
-    border: green;
+    background-color: darkgreen;
+    border: none;
     color: white;
+}
+
+.login_button:hover,
+.signup_button:hover {
+    cursor: pointer;
 }
 
 .register_p {
@@ -200,7 +195,7 @@ body{
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #5BC0EB;
+        background-color: rgb(3, 121, 3);
         color: white;
         width: 100px; 
         height: 100px; 
@@ -256,13 +251,17 @@ body{
     .login_button{
         width: 300px; 
         height: 40px; 
-        margin-top: 50px; 
+        margin-top: 50px;
+        font-size: 16px;  
+        font-weight: bold;
     }
 
     .signup_button{
         width: 300px; 
         height: 40px; 
         margin-top: 20px;  
+        font-size: 16px; 
+        font-weight: bold;
     }
 
     .regist_p_relative {

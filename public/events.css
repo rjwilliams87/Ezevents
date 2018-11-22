@@ -6,7 +6,7 @@
 }
 
 body{
-    background-color: lightgoldenrodyellow;
+    background-color: #eaeaea;
 }
 
 @media only screen and (min-width: 320px){
@@ -17,9 +17,8 @@ body{
         top: 0; 
         left: 0;
         padding: 0 20px; 
-        background-color: #5BC0EB; 
+        background-color: darkgreen; 
         color: white;
-        box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.411);
         z-index: 10; 
     }
 
@@ -27,7 +26,7 @@ body{
         position: absolute;
         width: 40%; 
         height: 153px; 
-        background-color: #5BC0EB;
+        background-color: darkgreen;
         top: 50px;
         right: -100vw;
         z-index: 3;
@@ -44,15 +43,16 @@ body{
 
     .nav_list a{
         color: white;
+        text-decoration: none;
         height: 50px;
         padding: 0 20px;
         line-height: 50px;
     }
 
-    .nav_list li:hover,
+    /* .nav_list li:hover,
     .nav_list li.active{
-        background: skyblue;
-    }
+        background-color: rgba(255, 99, 71, 0.411);
+    } */
 
     .nav_list li {
         border-bottom: 1px solid rgba(0,0,0,0.2);
@@ -78,22 +78,39 @@ body{
         float: left;
     }
 
-    main{
-        position: relative;
-        top: 75px; 
-    }
-
     .toggle{
         right: 0; 
     }
 
     main{
-        padding: 0 30px; 
+        position: relative;
+        top: 75px; 
+        padding: 0 30px;
     }
 
-    .events_list{
-        display: flex;
-        flex-direction: column;
+    .event_list{
+        min-width: 320px; 
+        margin: 20px auto;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+        background-color: rgba(0, 100, 0, 0.322);
+    }
+
+    .event_id {
+        color: black;
+        font-weight: bold;
     }
 
     h2{
@@ -102,95 +119,31 @@ body{
     }
 
     .create_button{
-        text-decoration: none;
+        margin-bottom: 20px;
+        border: 0;
         color: white;
-        background: royalblue;
-        margin: 5px auto 10px auto;
+        background: darkgreen;
         width: 175px;
         padding: 10px; 
         text-align: center;
-        /* border: 3px solid white; */
         border-radius: 5px; 
         font-weight: bold;
-        box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.8);
     }
 
     .create_button:hover{
         cursor: pointer;
-        background-color:rgba(65,105,225,0.2);
-        color: royalblue;
+        background-color: rgba(0, 100, 0, 0.685);
     }
 
     .event_table{
         /* display: flex; */
         padding: 30px; 
-    }
-
-    .event_table_row{
-        max-width: 600px;
-        margin-top: 10px; 
-        background-color: #7CDF64;
-        /* color: white; */
-        border-radius: 5px; 
-        box-shadow: 4px 7px 15px -2px black;
-        padding: 10px;
-    }
-
-    .table_li {
-        list-style: none;
-        margin: 5px;
-    }
-
-    .table_li_icons {
-        text-align: center;
-    }
-
-    .event_report_path {
-        text-align: center;
-        font-weight: bold;
-        /* border: 1px solid black; */
-        margin-bottom: 20px; 
-    }
-
-    .event_id {
-        color: black;
-        text-decoration: none;
-        border: 1px solid black;
-        border-radius: 5px; 
-        padding: 10px;
-        margin-bottom: 5px; 
-        background: rgba(255,255,255,0.4);
-        box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
-        
+        background: #ffffff;
     }
 
     .event_id:hover {
         cursor: pointer;
-        background: rgba(255,255,255,0.7);
-    }
-    
-    .row_list{
-        padding: 10px; 
-    }
-
-    .row_list_category{
-        font-weight: bold;
-    }
-
-    .icon{
-        margin-left: 2vw;
-    }
-
-    .icon:hover{
-        cursor: pointer;
-    }
-
-    .icon_update {
-        color: rgb(7, 7, 180);
-    }
-
-    .icon_delete {
-        color: rgb(177, 11, 11);
+        /* background: rgba(255,255,255,0.7); */
     }
 
     .hide{
@@ -209,10 +162,6 @@ body{
         margin-bottom: 75px; 
         margin-left: auto;
         margin-right: auto;
-    }
-
-    .new_form_container:hover {
-        box-shadow: 4px -7px 15px -2px black;
     }
 
     .form_heading{ 
@@ -241,7 +190,6 @@ body{
         width: 90%;
         height: 24px; 
         margin: auto;
-        background-color: lightyellow;
     }
 
     /* .food_order_input,
@@ -273,13 +221,23 @@ body{
     .add_food_button,
     .add_bev_button {
         height: 35px;
-        background-color: rgb(31, 182, 31); 
+        background-color: darkgreen;
         color: white;
+        /* border: 2px solid darkgreen; */
+        border: none;
         font-weight: bold;
         padding: 8px; 
-        border: none;
         border-radius: 5px; 
         margin: 25px auto;
+        transition: 0.5s;
+    }
+
+    .add_food_button:hover,
+    .add_bev_button:hover {
+        background-color: rgba(0, 100, 0, 0.151);
+        color: darkgreen;
+        border: 2px solid darkgreen;
+        transition: 0.5s; 
     }
 
     .new_form_container_buttons{
@@ -289,15 +247,15 @@ body{
     }
 
     .post_form_button{
-        background: royalblue;
-        border: royalblue;
+        background: darkgreen;
+        border: none;
         margin-left: 0;
         margin-right: 5vw;
     }
 
     .cancel_post_button {
-        background: red;
-        border: red;
+        background: black;
+        border: none;
     }
 
     .post_form_button,
@@ -310,7 +268,6 @@ body{
         color: white;
         font-weight: bold;
         font-size: 16px;
-        box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.8);
     }
 
     .post_form_button:hover,
@@ -324,6 +281,10 @@ body{
         position: relative;
         top: 60px; 
         padding: 15px; 
+    }
+
+    .event_report_display {
+        background-color: white;
     }
 
     .event_report h2{
@@ -347,11 +308,11 @@ body{
 
     .report_invoice {
         background-color: white;
-        border: 1px solid royalblue;
+        /* border: 1px solid royalblue; */
     }
 
     .invoice_order_head {
-        color: royalblue;
+        /* color: royalblue; */
         text-align: center;
     }
 
@@ -359,16 +320,16 @@ body{
         width: 90%;
         margin: 10px auto;
         padding: 10px;
-        border-bottom: 1px solid green;
+        border-bottom: 1px solid black;
     }
 
     .order_li {
         margin-top: 5px;
     }
 
-    .total {
+    /* .total {
         color: green;
-    }
+    } */
 
     .grouping_total{
         font-weight: bold;
@@ -413,7 +374,6 @@ body{
         color: white;
         font-weight: bold;
         font-size: 16px;
-        box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.8);
     }
 
     .report_btn:hover {
@@ -421,18 +381,17 @@ body{
     }
 
     .js_update_button {
-        background-color: royalblue;
+        background-color: darkgreen;
     }
 
     .js_delete_button {
-        background-color: red;
+        background-color: black;
     }
 
     /* update form */
     .update_form {
         background-color: white;
         padding: 10px; 
-        border: 1px solid royalblue;
         border-radius: 5px; 
         width: 85%;
         margin: 0 auto;
@@ -444,14 +403,12 @@ body{
 
     .update_field input {
         display: block;
-        background-color: lightyellow;
         margin: 5px auto 10px auto;
         width: 70%;
     }
 
     .update_legend {
         text-align: center;
-        color: royalblue;
         font-weight: bold;
         margin-top: 10px; 
         font-size: 18px;
@@ -489,7 +446,6 @@ body{
         font-weight: bold;
         padding: 10px;
         border-radius: 5px;
-        box-shadow: 2px 2px 2px 2px black;
     }
 
     .js_put_btn:hover,
@@ -498,16 +454,15 @@ body{
     }
 
     .js_put_btn {
-        background-color: royalblue;
+        background-color: darkgreen;
     }
 
     .cancel_update_btn {
-        background-color: red;
+        background-color: black;
     }
 }
 
 @media only screen and (min-width: 668px){
-
     
 }
 
@@ -539,8 +494,14 @@ body{
         padding: 0 50px; 
     }
 
+    /*event table*/
+    .events_list{
+        max-width: 960px; 
+        margin: auto;
+    }
+
     .create_button{
-        margin: 10px 30px 0px 150px; 
+        /* margin: 10px 30px 0px 150px;  */
     }
 
     .event_table_row{
@@ -565,16 +526,16 @@ body{
         margin: 0; 
     }
 
-    .table_li_icons {
-        width: 300px; 
-        position: relative;
-        right: 75px; 
-    }
-
     .new_form_container {
         max-width: 65vw;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .add_bev_button,
+    .add_food_button{
+        width: 150px; 
+        font-size: 15px; 
     }
 
     .form_heading{ 
@@ -586,8 +547,15 @@ body{
         margin: 20px auto;
     }
 
+    .report_contact {
+        text-align: left;
+        margin: 20px 0px 0px 20px; 
+        padding: 20px; 
+    }
+
     .report_invoice {
-        margin-top: 20px;
+        /* margin-top: 20px; */
+        padding: 20px; 
     }
 
     .report_invoice h2{
@@ -596,8 +564,9 @@ body{
 
     .invoice_order_head { 
         text-align: left;
-        margin: 10px 20px; 
-        border-bottom: 1px solid royalblue;
+        margin: 10px 20px;
+        margin-top: 20px;  
+        /* border-bottom: 1px solid black; */
     }
 
     .order_grouping { 
@@ -622,7 +591,7 @@ body{
     .grouping_total {
         width: 87%;
         text-align: right;
-        font-size: 24px;
+        /* font-size: 24px; */
         margin: 0;
         padding: 0;
     }
@@ -634,16 +603,19 @@ body{
         align-items: flex-end;
         padding: 0;
         margin: 0;
+        text-align: left;
     }
 
     .total_li{
-        font-size: 22px;
+        /* font-size: 22px; */
     }
 
     .order_grand_total {
-        font-size: 34px; 
+        /* font-size: 34px;  */
         /* border-top: 1px solid black; */
         margin: 10px 0;
+        /* background-color: darkgreen; */
+        /* padding: 10px;  */
     }
 
     .report_btn {
@@ -668,7 +640,7 @@ body{
     }
 
     .update_field_gray {
-        background-color: lightgray;
+        /* background-color: lightgray; */
         padding: 10px; 
     }
 

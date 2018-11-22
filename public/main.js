@@ -120,6 +120,8 @@ function hideElements(elements) {
 }
 
 function refreshEventsPage() {
+    $('.dynamic_food_inputs').html('');
+    $('.dynamic_bev_inputs').html('');
     $resetAnchor[0].reset();
     $eventTable.html('');
     getAndDisplayEventTable();
@@ -135,10 +137,10 @@ function displayAllEvents(data) {
 function renderTableHeading() {
     $('.event_table').html(`
     <tr>
-        <th>Invoice</th>
         <th>Contact</th>
         <th>Event Date</th>
         <th>Total</th>
+        <th>Invoice</th>
     </tr>
     `)
 }
@@ -152,18 +154,14 @@ function renderEventRow(data) {
     $('.event_table').append(
         `
             <tr class="table_row">
-                <td class="event_report_path table_td"><a href="#" id="${id}" class="event_id">View Invoice</a></td>
                 <td class="table_td"><span class="row_list_category"></span> ${contact.lastName}, ${contact.firstName}</td>
                 <td class="table_td"><span class="row_list_category"></span> ${eventDate}</td>
                 <td class="table_td"><span class="row_list_category"></span> $${totalCost}</td>
+                <td class="event_report_path table_td"><a href="#" id="${id}" class="event_id">View Invoice</a></td>
             </tr>
         `
     );
 }
-
-{/* <td class="table_td table_td_icons">
-<a id="_${id}_" class="icon icon_delete"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
-</td> */}
 
 function getAndDisplayEventTable() {
     renderTableHeading();
@@ -223,8 +221,8 @@ function generateEventReport(data) {
             </div>
         </div>
         <div class="update_delete_section" id="${id}">
-            <button id="_${id}" class="js_update_button report_btn">Update Event</button>
-            <button id="?${id}" class="js_delete_button report_btn">Delete Event</button>
+            <button id="_${id}" class="js_update_button report_btn green font_white">Update Event</button>
+            <button id="?${id}" class="js_delete_button report_btn font_white">Delete Event</button>
         </div>
         
         <div class="update_form" hidden></div>
@@ -242,28 +240,34 @@ function displayCreateEventForm(e) {
 function addFoodInputFields(e) {
     e.preventDefault();
     //if id neccessary for accessibility add counter and use for id/labels
-    $foodInput.append(`
-        <div class="food_input_group">
-            <label class="added_food_input">Food Item:</label>
-            <input type="text" class="food_type" name="type">
-            <label>Cost Per Item:</label>
-            <input type="number" class="food_cost" name="pricePerOrder">
-            <label>Quantity</label>
-            <input type="number" class="food_quantity" name="quantity">
-        </div>
+    $('.dynamic_food_inputs').append(`
+    <div class="food_input_group">
+        <label for="food_type" class="added_input"><span>Food Item</span>
+            <input type="text" class="food_type" name="type" required>
+        </label>
+        <label for="food_cost"><span>Item Cost</span>
+            <input type="number" class="food_cost" name="pricePerOrder" required>
+        </label>
+        <label for="food_quantity"><span>Quantity</span>
+            <input type="number" class="food_quantity" name="quantity" required>
+        </label>
+    </div>
     `);
 }
 
 function addBevInputFields(e) {
     e.preventDefault();
-    $bevInput.append(`
+    $('.dynamic_bev_inputs').append(`
     <div class="bev_input_group">
-        <label class="added_bev_input">Beverage Item:</label>
-        <input type="text" class="bev_type" name="type">
-        <label for="item_cost">Cost Per Item:</label>
-        <input type="number" id="item_cost" class="bev_cost" name="pricePerOrder">
-        <label for="bev_quantity">Quantity</label>
-        <input type="number" class="bev_quantity" name="quantity">
+        <label for="bev_type" class="added_input"><span>Beverage Item</span>
+            <input type="text" class="bev_type" name="type" required>
+        </label>
+        <label for="bev_cost"><span>Item Cost</span>
+            <input type="number" class="bev_cost" name="pricePerOrder" required>
+        </label>
+        <label for="bev_quantity"><span>Quantity</span>
+            <input type="number" class="bev_quantity" name="quantity" required>
+        </label>
     </div>
     `);
 }
@@ -295,64 +299,77 @@ function renderUpdateForm(data) {
         <h2 class="form_heading">Update Event</h2>
         <fieldset class="update_field">
             <legend class="update_legend">Contact Information</legend>
-            <label for="update_firstName" class="">First Name:</label>
-            <input type="text" id="update_firstName" class="" value="${contact.firstName}">
-            <label for="update_lastName" class="">Last Name:</label>
-            <input type="text" id="update_lastName" class="" value="${contact.lastName}">
-            <label for="update_email" class="">Email:</label>
-            <input type="text" id="update_email" class="" value="${contact.email}">
-            <label for="update_phone" class="">Phone:</label>
-            <input type="text" id="update_phone" class="" value="${contact.phone}">
+            <label for="update_firstName" class=""><span>First Name</span>
+                <input type="text" id="update_firstName" class="" value="${contact.firstName}">
+            </label>
+            <label for="update_lastName" class=""><span>Last Name</span>
+                <input type="text" id="update_lastName" class="" value="${contact.lastName}">
+            </label>
+            <label for="update_email" class=""><span>Email</span>
+                <input type="text" id="update_email" class="" value="${contact.email}">
+            </label>
+            <label for="update_phone" class=""><span>Phone</span>
+                <input type="text" id="update_phone" class="" value="${contact.phone}">
+            </label>
         </fieldset>
         <fieldset class="update_field update_field_gray">
             <legend class="update_legend update_legend_padding">Event Date and Time</legend>
-            <label for="update_date">Date:</label>
-            <input type="date" id="update_date" class="" value="" required>
-            <label for="update_time">Time:</label>
-            <input type="time" id="update_time" value="${time}">
+            <label for="update_date"><span>Date</span>
+                <input type="date" id="update_date" class="" value="" required>
+            </label>
+            <label for="update_time"><span>Time</span>
+                <input type="time" id="update_time" value="${time}">
+            </label>
         </fieldset>
         <fieldset class="update_field">
             <legend class="update_legend update_legend_border">Food Order</legend>
             <div class="food_order_input2">
                 ${order.food.map(item => {return `
                     <div class="food_input_group">
-                        <label for="update_food_item" class="update_border">Food Item:</label>
-                        <input type="text" id="${item._id}" class="food_type" value="${item.type}" name="type">
-                        <label for="update_food_cost">Cost Per Item:</label>
-                        <input type="number" id="update_food_cost" class="food_cost" value="${item.pricePerOrder}" name="pricePerOrder">
-                        <label for="update_food_quantity">Quantity</label>
-                        <input type="number" id="update_food_quantity" class="food_quantity" value="${item.quantity}" name="quantity">
+                        <label for="update_food_item" class="update_border"><span>Item</span>
+                            <input type="text" id="${item._id}" class="food_type" value="${item.type}" name="type">
+                        </label>
+                        <label for="update_food_cost"><span>Item Cost</span>
+                            <input type="number" id="update_food_cost" class="food_cost" value="${item.pricePerOrder}" name="pricePerOrder">
+                        </label>
+                        <label for="update_food_quantity"><span>Quantity</span>
+                            <input type="number" id="update_food_quantity" class="food_quantity" value="${item.quantity}" name="quantity">
+                        </label>
                     </div>
                     `
                 }).join('')}
             </div>
-            <button class="add_food_button update_order_btn">Add Food</button>
+            <button class="add_food_button update_order_btn green font_white">Add Food</button>
         </fieldset>
         <fieldset class="update_field update_field_gray">
                 <legend class="update_legend update_legend_padding">Beverage Order</legend>
                 <div class="bev_order_input2">
                     ${order.beverages.map(item => {return `
                     <div class="bev_input_group">
-                        <label for="update_bev_item" class="update_border">Beverage Item:</label>
-                        <input type="text" id="${item._id}" class="bev_type" value="${item.type}" name="type">
-                        <label for="update_bev_cost">Cost Per Item:</label>
-                        <input type="number" id="update_bev_cost" class="bev_cost" value="${item.pricePerOrder}" name="pricePerOrder">
-                        <label for="update_bev_quantity">Quantity</label>
-                        <input type="number" id="update_bev_quantity" class="bev_quantity" value="${item.quantity}" name="quantity">
+                        <label for="update_bev_item" class="update_border"><span>Item</span>
+                            <input type="text" id="${item._id}" class="bev_type" value="${item.type}" name="type">
+                        </label>
+                        <label for="update_bev_cost"><span>Item Cost</span>
+                            <input type="number" id="update_bev_cost" class="bev_cost" value="${item.pricePerOrder}" name="pricePerOrder">
+                        </label>
+                        <label for="update_bev_quantity"><span>Quantity</span>
+                            <input type="number" id="update_bev_quantity" class="bev_quantity" value="${item.quantity}" name="quantity">
+                        </label>
                     </div>
                     `
                 }).join('')}
                 </div>
-                <button class="add_bev_button update_order_btn">Add Beverage</button>
+                <button class="add_bev_button update_order_btn green font_white">Add Beverage</button>
         </fieldset>
         <fieldset class="update_field">
             <legend class="update_legend">Room and Equipment Rental</legend>
-            <label for="update_rental_price">Rental Price:</label>
-            <input type="number" id="update_rental_price" value="${order.rentalPrice}" required>
+            <label for="update_rental_price"><span>Rental Price</span>
+                <input type="number" id="update_rental_price" value="${order.rentalPrice}" required>
+            </label>
         </fieldset>
         <div class="update_btns">
-            <button type="submit" class="js_put_btn" id="${id}">Update Event</button>
-            <button class="cancel_update_btn">Cancel</button>
+            <button type="submit" class="js_put_btn green font_white" id="${id}">Update Event</button>
+            <button class="cancel_update_btn font_white">Cancel</button>
         </div>
     </form>
         `
@@ -363,12 +380,15 @@ function addFoodtoUpdateForm(e) {
         e.preventDefault();
         $('.food_order_input2').append(`
         <div class="food_input_group">
-            <label class="added_food_input">Food Item:</label>
-            <input type="text" class="food_type" name="type">
-            <label>Cost Per Item:</label>
-            <input type="number" class="food_cost" name="pricePerOrder">
-            <label>Quantity</label>
-            <input type="number" class="food_quantity" name="quantity">
+            <label for="food_type" class="added_input"><span>Food Item</span>
+                <input type="text" class="food_type" name="type" required>
+            </label>
+            <label for="food_cost"><span>Item Cost</span>
+                <input type="number" class="food_cost" name="pricePerOrder" required>
+            </label>
+            <label for="food_quantity"><span>Quantity</span>
+                <input type="number" class="food_quantity" name="quantity" required>
+            </label>
         </div>
         `);
 }
@@ -377,64 +397,18 @@ function addBevToUpdateForm(e) {
         e.preventDefault();
         $('.bev_order_input2').append(`
         <div class="bev_input_group">
-            <label class="added_bev_input">Beverage Item:</label>
-            <input type="text" class="bev_type" name="type">
-            <label>Cost Per Item:</label>
-            <input type="number" class="bev_cost" name="pricePerOrder">
-            <label>Quantity</label>
-            <input type="number" class="bev_quantity" name="quantity">
+            <label for="bev_type" class="added_input"><span>Beverage Item</span>
+                <input type="text" class="bev_type" name="type" required>
+            </label>
+            <label for="bev_cost"><span>Item Cost</span>
+                <input type="number" class="bev_cost" name="pricePerOrder" required>
+            </label>
+            <label for="bev_quantity"><span>Quantity</span>
+                <input type="number" class="bev_quantity" name="quantity" required>
+            </label>
         </div>
         `)
 }
-
-//creates objects array used for PUT and POST request
-// function createOrderObjects () {
-//     let foodObjs = [];
-//     let bevObjs = [];
-
-//     const foodTypes = document.getElementsByClassName('food_type');
-//     const foodCost = document.getElementsByClassName('food_cost');
-//     const foodQuantity = document.getElementsByClassName('food_quantity');
-
-//     for (let i = 0; i < foodTypes.length; i++){
-//         let obj = {};
-//         if (foodTypes[i].id) {
-//             obj._id = foodTypes[i].id;
-//         }
-//         obj.type = foodTypes[i].value;
-//         obj.pricePerOrder = foodCost[i].value;
-//         obj.quantity = foodQuantity[i].value;
-        
-//         if (obj.pricePerOrder === '' || obj.quantity === '') {
-//             continue;
-//         }else {
-//             foodObjs.push(obj);
-//         }
-//     }
-
-//     const bevTypes = document.getElementsByClassName('bev_type');
-//     const bevCost = document.getElementsByClassName('bev_cost');
-//     const bevQuantity = document.getElementsByClassName('bev_quantity');
-//     for (let i = 0; i < bevTypes.length; i++){
-//         let obj = {};
-//         if (bevTypes[i].id) {
-//             obj._id = bevTypes[i].id;
-//         }
-//         obj.type = bevTypes[i].value;
-//         obj.pricePerOrder = bevCost[i].value;
-//         obj.quantity = bevQuantity[i].value;
-        
-//         if (obj.pricePerOrder === '' || obj.quantity === '') {
-//             continue;
-//         }else {
-//             bevObjs.push(obj);
-//         }
-//     }
-//     return {
-//         foodObjs,
-//         bevObjs
-//     }
-// }
 
 function handleUpdateSubmit(e) {
     e.preventDefault();

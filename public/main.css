@@ -6,7 +6,7 @@
 }
 
 body{
-    background-image: linear-gradient(rgba(0,0,0,0.658), rgba(0, 0, 0, 0.658)), url(https://cdn.pixabay.com/photo/2018/08/10/21/52/restaurant-3597677_960_720.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.658), rgba(0, 0, 0, 0.658)), url(CSS_Images/restaurant-3597677_1920.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

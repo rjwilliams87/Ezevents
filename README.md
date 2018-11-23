@@ -49,6 +49,6 @@ Technologies
 
 Coming Updates
 ---------------
-* Filter and search table
-* Page for weekly, yearly, and month incoming reporting
+* Filter and search table functionality
+* Dedicated page for weekly, yearly, and monthly income reporting
 * Dedicated table for completed and paid events/invoices

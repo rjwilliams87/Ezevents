@@ -130,8 +130,6 @@ describe('Events API', function(){
             .then(res => {
                 expect(res.id).to.equal(event.id);
                 expect(res.orderTotal).to.equal(event.orderTotal);
-                // expect(res.date).to.equal(event.date);
-                // const contactSerialized =  `${res.contact.lastName}, ${res.contact.firstName}`
                 expect(res.contact.firstName).to.equal(event.contact.firstName);
                 expect(res.contact.lastName).to.equal(event.contact.lastName);
                 expect(res.contact.email).to.equal(event.contact.email);
@@ -175,14 +173,15 @@ describe('Events API', function(){
                     expect(res.body.order).to.be.a('object');
                     expect(res.body.order).to.include.keys('food', 'beverages', 'rentalPrice');
                     expect(res.body.id).to.equal(event.id);
-                    // expect(res.body.contact.firstName).to.equal(event.contact.firstName);
-                    // expect(res.body.contact.lastName).to.equal(event.contact.lastName);
-                    // expect(res.body.contact.email).to.equal(event.contact.email);
-                    // expect(res.body.contact.phone).to.equal(event.contact.phone);
-                    // expect(res.body.date).to.equal(event.date);
+                    expect(res.body.contact.firstName).to.equal(event.contact.firstName);
+                    expect(res.body.contact.lastName).to.equal(event.contact.lastName);
+                    expect(res.body.contact.email).to.equal(event.contact.email);
+                    expect(res.body.contact.phone).to.equal(event.contact.phone);
                     expect(res.body.time).to.equal(event.time);
-                    // expect(res.body.order.food).to.equal(event.order.food);
-                    // expect(res.body.order.beverages).to.equal(event.order.beverages);
+                    expect(res.body.order.food).to.be.a('array');
+                    expect(res.body.order.food).to.have.lengthOf.at.least(1);
+                    expect(res.body.order.beverages).to.be.a('array');
+                    expect(res.body.order.food).to.have.lengthOf.at.least(1);
                     expect(res.body.order.rentalPrice).to.equal(event.order.rentalPrice);
                     expect(res.body.orderTotal).to.equal(event.orderTotal);
                 })
@@ -223,27 +222,25 @@ describe('Events API', function(){
             })
         })
     });
-// trying to test for failure to input correct id into params
-// getting a 500 response
-// why? 
+
     describe('PUT request', function(){
-        // it('should fail to update if id is incorrect', function(){
-        //     const updatedEvent = {
-        //         id: '01110011', 
-        //         contact: {
-        //             firstName: 'Fred',
-        //             lastName: 'Flintstone'
-        //         }
-        //     }
-        //     return chai.request(app)
-        //     .put(`/api/events/${updatedEvent.id}`)
-        //     .set('authorization', `Bearer ${authToken}`)
-        //     .send(updatedEvent)
-        //     .catch(err => err.response)
-        //     .then(res => {
-        //         expect(res).to.have.status(400);
-        //     })
-        // })
+        it('should fail to update if id is incorrect', function(){
+            const updatedEvent = {
+                id: '01110011', 
+                contact: {
+                    firstName: 'Fred',
+                    lastName: 'Flintstone'
+                }
+            }
+            return chai.request(app)
+            .put(`/api/events/${updatedEvent.id}`)
+            .set('authorization', `Bearer ${authToken}`)
+            .send(updatedEvent)
+            .catch(err => err.response)
+            .then(res => {
+                expect(res).to.have.status(500);
+            })
+        })
 
         it('should correctly update fields on PUT request', function(){
             const updatedEvent = {

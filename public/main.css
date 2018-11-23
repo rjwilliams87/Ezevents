@@ -6,7 +6,7 @@
 }
 
 body{
-    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0, 0, 0, 0.658)), url(https://cdn.pixabay.com/photo/2018/08/10/21/52/restaurant-3597677_960_720.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.658), rgba(0, 0, 0, 0.658)), url(https://cdn.pixabay.com/photo/2018/08/10/21/52/restaurant-3597677_960_720.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -55,7 +55,7 @@ body{
     background-color: white;
     margin: 0 auto;
     width: 90vw;
-    height: 35vh;
+    height: 40vh;
     padding-top: 10px; 
     border-radius: 5px; 
     border: white;
@@ -122,18 +122,11 @@ body{
     color: white;
 }
 
-/* .signup_container{
-    margin: 0 auto;
-    width: 90vw;
-    padding-top: 10px; 
-    border-radius: 5px; 
-} */
-
 .singup_fields{
     background-color: white;
     display: flex;
     border: 0;
-    height: 50vh;
+    height: 60vh;
     margin: 0 auto;
     width: 90vw;
     padding-top: 10px; 
@@ -208,11 +201,16 @@ body{
 
     .login_header{
         visibility: visible;
-        font-size: 28px; 
+        font-size: 25px; 
         text-align: center;
         position: relative;
         top: 30px; 
         margin-bottom: 15px; 
+    }
+
+    .header_small {
+        font-size: 25px;
+        margin-bottom: 5px; 
     }
 
     .login_fields{
@@ -220,15 +218,11 @@ body{
         height: 400px; 
     }
 
-    .signup_container{
-
-    }
-
     .singup_fields{
         position: relative;
         bottom: 15px; 
         width: 400px; 
-        height: 475px; 
+        height: 500px; 
         margin-top: 20px; 
     }
 

@@ -42,6 +42,11 @@ body{
 
 .nav_path{
     list-style: none;
+    font-weight: bold;
+}
+
+.nav_path:hover {
+    background-color: green;
 }
 
 .nav_btn{
@@ -60,6 +65,7 @@ body{
     line-height: 50px; 
     font-size: 24px; 
     display: block;
+    width: 30px; 
 }
 
 .menu_toggle:hover{
@@ -68,6 +74,11 @@ body{
 
 .toggle{
     right: 0; 
+}
+
+.active {
+    background-color: rgba(20, 255, 20, 0.315);
+    transition: 0.5s;
 }
 
 .page_heading{
@@ -128,22 +139,25 @@ tr:nth-child(even) {
     background-color: white;
 }
 
-.event_report h2{
-    font-size: 24px; 
-    text-align: center;
-}
-
 .event_report p{
     margin: 5px 0 10px 5px; 
 }
 
 .report_contact{
+    padding-top: 20px; 
     margin-bottom: 10px; 
     text-align: center;
 }
 
 .invoice_order_head {
+    font-size: 16px;
     text-align: center;
+    padding-top: 15px;
+}
+
+.invoice_order span {
+    font-weight: bold;
+    margin-right: 10px; 
 }
 
 .order_grouping {
@@ -157,13 +171,6 @@ tr:nth-child(even) {
     margin-top: 5px;
 }
 
-.grouping_total{
-    font-weight: bold;
-    font-size: 18px;
-    padding: 4px; 
-    margin-left: 5px; 
-}
-
 .order_totals {
     padding: 10px; 
     margin-left: 8px; 
@@ -171,7 +178,6 @@ tr:nth-child(even) {
 
 .total_li{
     list-style: none;
-    font-size: 18px;
     margin-top: 5px; 
 }
 
@@ -181,7 +187,7 @@ tr:nth-child(even) {
 
 .order_grand_total {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 16px;
 }
 /* buttons */
 button {
@@ -215,7 +221,7 @@ button:hover {
 .add_food_button,
 .add_bev_button {
     height: 35px; 
-    margin: 25px auto;
+    margin: 25px 0 25px 15px;
     transition: 0.5s;
 }
 
@@ -232,15 +238,6 @@ button:hover {
     height: 50px;   
     font-size: 16px;
 }
-
-.report_btn {
-    margin: 20px 0;
-}
-
-.update_order_btn{
-    margin-left: 20px; 
-}
-
 
 .js_put_btn,
 .cancel_update_btn {
@@ -263,6 +260,8 @@ form {
 }
 
 .update_form {
+    position: relative;
+    top: 80px; 
     margin: 0 auto;
 }
 
@@ -309,12 +308,14 @@ input {
 .update_delete_section { 
     display: flex;
     justify-content: space-evenly;
+    padding: 20px;
 }
 
 .new_form_container_buttons{
     display: flex;
     justify-content: center;
     margin-top: 20px; 
+    margin-bottom: 30px; 
 }
 
 .update_btns {
@@ -424,15 +425,20 @@ input {
         margin: 20px auto;
     }
 
+    .invoice_head {
+        border-bottom: 1px solid lightgray;
+    }
+
     .report_contact {
         text-align: left;
         margin: 20px 0px 0px 20px; 
         padding: 20px; 
+        padding-bottom: 0;
     }
 
     .report_invoice {
-        /* margin-top: 20px; */
         padding: 20px; 
+        padding-top: 0;
     }
 
     .report_invoice h2{
@@ -443,6 +449,7 @@ input {
         text-align: left;
         margin: 10px 20px;
         margin-top: 20px;  
+        font-size: 18px;
         /* border-bottom: 1px solid black; */
     }
 
@@ -483,7 +490,12 @@ input {
         text-align: left;
     }
 
+    .total_header {
+        display: none;
+    }
+
     .order_grand_total {
+        font-size: 18px; 
         margin: 10px 0;
     }
 
@@ -491,7 +503,6 @@ input {
         width: 200px; 
     }
 
-    /*update form*/
     .update_form{
         max-width: 65vw;
         margin-top: 30px; 
@@ -501,31 +512,4 @@ input {
     .update_field {
         margin-top: 30px;
     }
-
-    /* .update_field input {
-        height: 22px; 
-        font-size: 15px; 
-        padding: 5px; 
-    }
-
-    .update_field_gray {
-        /* padding: 10px;  */
-    } */
-
-    /* .update_field label {
-        margin: 10px 0px 5px 20px; 
-    }
-
-    .update_legend {
-        margin-top: 25px;
-        font-size: 20px;
-    }
-
-    .update_legend_padding {
-        padding-top: 40px; 
-    }
-
-    .update_border { 
-        padding-top: 10px; 
-    } */
 }

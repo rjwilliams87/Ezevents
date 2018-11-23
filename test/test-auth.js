@@ -11,15 +11,15 @@ const {JWT_SECRET, JWT_EXPIRY, TEST_DATABASE_URL} = require('../config');
 const expect = chai.expect;
 chai.use(chaiHttp);
 
-function generateUser(userPassword){
-    const testUser = {
-        username: faker.internet.userName(),
-        password: userPassword, 
-        firstName: faker.name.firstName,
-        lastName: faker.name.lastName
-    }
-    return testUser;
-}
+// function generateUser(userPassword){
+//     const testUser = {
+//         username: faker.internet.userName(),
+//         password: userPassword, 
+//         firstName: faker.name.firstName,
+//         lastName: faker.name.lastName
+//     }
+//     return testUser;
+// }
 
 describe('Authorization endpoints', function(){
     const username = 'mytestuser';
@@ -61,7 +61,6 @@ describe('Authorization endpoints', function(){
             })
         })
         
-        // it should reject incorrect username
         it('should reject request with incorrect or nonexistent username', function(){
             return chai.request(app)
             .post('/api/auth/login')
@@ -72,7 +71,6 @@ describe('Authorization endpoints', function(){
             })
         })
 
-        //it should reject incorrect password
         it('should reject login with incorrect password', function(){
             return chai.request(app)
             .post('/api/auth/login')
@@ -82,7 +80,7 @@ describe('Authorization endpoints', function(){
                 expect(res).to.have.status(401);
             })
         })
-        //it should return valid auth token
+
         it('should return a valid auth token with correct credential input', function(){
             return chai.request(app)
             .post('/api/auth/login')
@@ -115,7 +113,7 @@ describe('Authorization endpoints', function(){
                 expect(res).to.have.status(401);
             })
         })
-        //it should reject invalid token
+
         it('should reject invalid credentials', function(){
             const authToken = jwt.sign(
                 {
@@ -139,7 +137,7 @@ describe('Authorization endpoints', function(){
                 expect(res).to.have.status(401);
             })
         })
-        //it should respond with a new valid token 
+
         it('should create a new token with a new expiry date', function(){
             const authToken = jwt.sign(
                 {

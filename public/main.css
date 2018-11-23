@@ -22,7 +22,6 @@ body{
 .landing_container{
     height: 100vh;
     width: 100vw;
-    /* margin-top: 50px; */
 }
 
 .icons_container {
@@ -50,7 +49,6 @@ body{
 }
 
 .login_fields {
-    max-width: 500px; 
     display: flex;
     background-color: white;
     margin: 0 auto;
@@ -105,6 +103,8 @@ body{
     color: white;
 }
 
+.login_button:focus,
+.signup_button:focus,
 .login_button:hover,
 .signup_button:hover {
     cursor: pointer;

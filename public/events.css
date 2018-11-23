@@ -45,6 +45,7 @@ body{
     font-weight: bold;
 }
 
+.nav_path:focus,
 .nav_path:hover {
     background-color: green;
 }
@@ -74,11 +75,6 @@ body{
 
 .toggle{
     right: 0; 
-}
-
-.active {
-    background-color: rgba(20, 255, 20, 0.315);
-    transition: 0.5s;
 }
 
 .page_heading{
@@ -189,6 +185,7 @@ tr:nth-child(even) {
     font-weight: bold;
     font-size: 16px;
 }
+
 /* buttons */
 button {
     border: none;
@@ -199,6 +196,7 @@ button {
     padding: 10px; 
 }
 
+button:focus,
 button:hover {
     cursor: pointer;
 }
@@ -331,27 +329,6 @@ input {
 }
 
 @media only screen and (min-width: 667px) {
-    legend {
-        text-align: left;
-    }
-
-    label{
-        margin-top: 15px; 
-        margin-bottom: 15px; 
-    }
-
-    form span {
-        width: 110px; 
-        display: inline-block;
-        margin-left: 10px; 
-    }
-
-    input {
-        display: inline-block;
-    }
-}
-
-@media only screen and (min-width: 900px){
     .header,
     .events_display{
         padding: 0 50px; 
@@ -376,7 +353,37 @@ input {
         display: none;
     }
 
-    /*event table*/
+    legend {
+        text-align: left;
+    }
+
+    label{
+        margin-top: 15px; 
+        margin-bottom: 15px; 
+    }
+
+    form span {
+        width: 110px; 
+        display: inline-block;
+        margin-left: 10px; 
+    }
+
+    input {
+        display: inline-block;
+    }
+
+    .report_btn,
+    .post_form_button,
+    .cancel_post_button,
+    .js_put_btn,
+    .cancel_update_btn{
+        width: 120px;
+        height: 60px;   
+        font-size: 18px;
+    }
+}
+
+@media only screen and (min-width: 900px){
     .events_list{
         max-width: 960px; 
         margin: auto;
@@ -450,7 +457,6 @@ input {
         margin: 10px 20px;
         margin-top: 20px;  
         font-size: 18px;
-        /* border-bottom: 1px solid black; */
     }
 
     .order_grouping { 
@@ -461,7 +467,6 @@ input {
     }
 
     .order_li {
-        /* margin-right: 20px;  */
         list-style: none;
         width: 200px; 
         text-align: left;
@@ -475,7 +480,6 @@ input {
     .grouping_total {
         width: 87%;
         text-align: right;
-        /* font-size: 24px; */
         margin: 0;
         padding: 0;
     }

@@ -172,7 +172,7 @@ function renderEventRow(data) {
                 <td class="table_td"><span class="row_list_category"></span> ${eventDate}</td>
                 <td class="table_td"><span class="row_list_category"></span> ${time}</td>
                 <td class="table_td"><span class="row_list_category"></span> $${totalCost}</td>
-                <td class="event_report_path table_td"><a href="#" id="${id}" class="event_id">View Invoice</a></td>
+                <td class="event_report_path table_td"><a href="#" id="${id}" class="event_id" aria-label="Click to view ${contact.lastName}'s invoice">View Invoice</a></td>
             </tr>
         `
     );

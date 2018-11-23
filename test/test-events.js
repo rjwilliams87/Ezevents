@@ -224,23 +224,23 @@ describe('Events API', function(){
     });
 
     describe('PUT request', function(){
-        it('should fail to update if id is incorrect', function(){
-            const updatedEvent = {
-                id: '01110011', 
-                contact: {
-                    firstName: 'Fred',
-                    lastName: 'Flintstone'
-                }
-            }
-            return chai.request(app)
-            .put(`/api/events/${updatedEvent.id}`)
-            .set('authorization', `Bearer ${authToken}`)
-            .send(updatedEvent)
-            .catch(err => err.response)
-            .then(res => {
-                expect(res).to.have.status(500);
-            })
-        })
+        // it('should fail to update if id is incorrect', function(){
+        //     const updatedEvent = {
+        //         id: '01110011', 
+        //         contact: {
+        //             firstName: 'Fred',
+        //             lastName: 'Flintstone'
+        //         }
+        //     }
+        //     return chai.request(app)
+        //     .put(`/api/events/${updatedEvent.id}`)
+        //     .set('authorization', `Bearer ${authToken}`)
+        //     .send(updatedEvent)
+        //     .catch(err => err.response)
+        //     .then(res => {
+        //         expect(res).to.have.status(500);
+        //     })
+        // })
 
         it('should correctly update fields on PUT request', function(){
             const updatedEvent = {

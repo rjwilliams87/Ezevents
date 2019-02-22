@@ -1,79 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>EZEvents Sign In</title>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-        <link rel="stylesheet" href="main.css" type="text/css">
-    </head>
-    <body>
-        <div class="landing_container">
-            <h1 class="main_header">EZ Events</h1>
-            <div class="page_container">
-                <div class="icons_container" role="banner">
-                    <div class="icons">
-                        <p class="landing_description">Making Event Management EZ</p>
-                        <div class="icons_div">
-                            <p>Create Events</p>
-                            <div class="front_image" aria-hidden="true">
-                                <span><i class="far fa-plus-square fa-3x"></i></span>
-                            </div>
-                        </div>
-                        <div class="icons_div icon2">
-                            <p>Manage Orders</p>
-                            <div class="front_image" aria-hidden="true">
-                                <span><i class="fas fa-copy fa-3x"></i></span>
-                            </div>
-                        </div>
-                        <div class="icons_div icon3">
-                            <p>Update Invoices</p>
-                            <div class="front_image" aria-hidden="true">
-                                <span class="money"><i class="fas fa-dollar-sign fa-3x"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <main>
-                    <div role="region" class="login_container" aria-live="assertive">
-                        <form class="login_form">
-                            <fieldset class="login_fields">
-                                <p class="login_error" hidden aria-live="assertive">Uh oh! Username or Password not recognized!</p>
-                                <legend class="login_header">Login</legend>
-                                <label for="login_username" class="login_label">Username:</label>
-                                <input type="text" placeholder="ned123" id="login_username" class="login_input" required>
-                                <label for="login_password" class="login_label">Password:</label>
-                                <input type="password" placeholder="password" id="login_password" class="login_input" required>
-                                <button type="submit" class="login_button">Login</button>
-                            </fieldset>
-                        </form>
-                        <p class="register_p">New to EZ Events? <span class=""><a href="#" class="register_path" aria-label="click to display signup form">Register here</a></span></p>
-                    </div>
-                    <div role="region" class="signup_container" aria-live="assertive" hidden>
-                        <form class="signup_form">
-                            <fieldset class="singup_fields">
-                                <legend class="login_header header_small">Signup</legend>
-                                <label for="signup_firstName" class="login_label signup_label">First Name:</label>
-                                <input type="text" placeholder="Jon" id="signup_firstName" class="login_input signup_input" required>
-                                <label for="signup_lastName" class="login_label signup_label">Last Name:</label>
-                                <input type="text" placeholder="Snow" id="signup_lastName" class="login_input signup_input" required>
-                                <label for="signup_username" class="login_label signup_label">Username:</label>
-                                <p class="username_error" aria-live="assertive" hidden>Username already exist!</p>
-                                <input type="text" placeholder="whitewolf123" id="signup_username" class="login_input signup_input" required>
-                                <label for="signup_password" class="login_label signup_label">Password:</label>
-                                <input type="password" placeholder="password" id="signup_password" class="login_input signup_input" required>
-                                <p class="password_info">Must be at least 8 characters</p>
-                                <button type="submit" class="signup_button">Sign Up</button>
-                            </fieldset>
-                        </form>
-                        <p class="register_p regist_p_relative">Already a member? <a href="#" class="login_path" aria-label="click to display login form">Login here</a></p>
-                    </div>
-                </main> 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>EZEvents Sign In</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="main.css" type="text/css" />
+  </head>
+  <body>
+    <div class="landing_container">
+      <h1 class="main_header">EZ Events</h1>
+      <div class="page_container">
+        <div class="icons_container" role="banner">
+          <div class="icons">
+            <p class="landing_description">Making Event Management EZ</p>
+            <div class="icons_div">
+              <p>Create Events</p>
+              <div class="front_image" aria-hidden="true">
+                <span><i class="far fa-plus-square fa-3x"></i></span>
+              </div>
             </div>
+            <div class="icons_div icon2">
+              <p>Manage Orders</p>
+              <div class="front_image" aria-hidden="true">
+                <span><i class="fas fa-copy fa-3x"></i></span>
+              </div>
+            </div>
+            <div class="icons_div icon3">
+              <p>Update Invoices</p>
+              <div class="front_image" aria-hidden="true">
+                <span class="money"
+                  ><i class="fas fa-dollar-sign fa-3x"></i
+                ></span>
+              </div>
+            </div>
+          </div>
         </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="app.js"></script>
-        <script src="main.js"></script>
-    </body>
+        <main>
+          <div role="region" class="login_container" aria-live="assertive">
+            <form class="login_form">
+              <fieldset class="login_fields">
+                <p class="login_error" hidden aria-live="assertive">
+                  Uh oh! Username or Password not recognized!
+                </p>
+                <legend class="login_header">Login</legend>
+                <label for="login_username" class="login_label"
+                  >Username:</label
+                >
+                <input
+                  type="text"
+                  placeholder="ned123"
+                  id="login_username"
+                  class="login_input"
+                  required
+                />
+                <label for="login_password" class="login_label"
+                  >Password:</label
+                >
+                <input
+                  type="password"
+                  placeholder="password"
+                  id="login_password"
+                  class="login_input"
+                  required
+                />
+                <button type="submit" class="login_button">Login</button>
+              </fieldset>
+            </form>
+            <p class="register_p">
+              New to EZ Events?
+              <span class=""
+                ><a
+                  href="#"
+                  class="register_path"
+                  aria-label="click to display signup form"
+                  >Register here</a
+                ></span
+              >
+            </p>
+          </div>
+          <div
+            role="region"
+            class="signup_container"
+            aria-live="assertive"
+            hidden
+          >
+            <form class="signup_form">
+              <fieldset class="singup_fields">
+                <legend class="login_header header_small">Signup</legend>
+                <label for="signup_firstName" class="login_label signup_label"
+                  >First Name:</label
+                >
+                <input
+                  type="text"
+                  placeholder="Jon"
+                  id="signup_firstName"
+                  class="login_input signup_input"
+                  required
+                />
+                <label for="signup_lastName" class="login_label signup_label"
+                  >Last Name:</label
+                >
+                <input
+                  type="text"
+                  placeholder="Snow"
+                  id="signup_lastName"
+                  class="login_input signup_input"
+                  required
+                />
+                <label for="signup_username" class="login_label signup_label"
+                  >Username:</label
+                >
+                <p class="username_error" aria-live="assertive" hidden>
+                  Username already exist!
+                </p>
+                <input
+                  type="text"
+                  placeholder="whitewolf123"
+                  id="signup_username"
+                  class="login_input signup_input"
+                  required
+                />
+                <label for="signup_password" class="login_label signup_label"
+                  >Password:</label
+                >
+                <input
+                  type="password"
+                  placeholder="password"
+                  id="signup_password"
+                  class="login_input signup_input"
+                  required
+                />
+                <p class="password_info">Must be at least 8 characters</p>
+                <button type="submit" class="signup_button">Sign Up</button>
+              </fieldset>
+            </form>
+            <p class="register_p regist_p_relative">
+              Already a member?
+              <a
+                href="#"
+                class="login_path"
+                aria-label="click to display login form"
+                >Login here</a
+              >
+            </p>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+    <script src="main.js"></script>
+  </body>
 </html>

@@ -1,112 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>EZ Events</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="events.css" type="text/css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="events.css" type="text/css" />
+  </head>
+  <body>
     <div id="wrapper">
-        <header class="header green font_white">
-            <div class="nav_container" role="navigation">
-                <h1 class="page_heading">EZ Events</h1>
-                <nav class="nav green">
-                    <ul class="nav_list">
-                        <li class="nav_path"><a id="home_btn" class="nav_btn font_white" href="#" aria-label="click to refresh event table" aria-live="polite">My Events</a></li>
-                        <!-- <li class="nav_path"><a id="profile_btn" class="nav_btn font_white" href="#">Profile</a></li> -->
-                        <li class="nav_path"><a id="logout_btn" class="nav_btn font_white" href="#" aria-label="click to logout" aria-live="polite">Logout</a></li>
-                    </ul>
-                </nav>
-                <div class="menu_toggle font_white"><i class="fa fa-bars" aria-label="click to display navigation"></i></div>
+      <header class="header green font_white">
+        <div class="nav_container" role="navigation">
+          <h1 class="page_heading">EZ Events</h1>
+          <nav class="nav green">
+            <ul class="nav_list">
+              <li class="nav_path">
+                <a
+                  id="home_btn"
+                  class="nav_btn font_white"
+                  href="#"
+                  aria-label="click to refresh event table"
+                  aria-live="polite"
+                  >My Events</a
+                >
+              </li>
+              <!-- <li class="nav_path"><a id="profile_btn" class="nav_btn font_white" href="#">Profile</a></li> -->
+              <li class="nav_path">
+                <a
+                  id="logout_btn"
+                  class="nav_btn font_white"
+                  href="#"
+                  aria-label="click to logout"
+                  aria-live="polite"
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </nav>
+          <div class="menu_toggle font_white">
+            <i class="fa fa-bars" aria-label="click to display navigation"></i>
+          </div>
+        </div>
+      </header>
+      <main class="events_display">
+        <section class="events_list" aria-live="assertive">
+          <button
+            class="js_create_event_button create_button green font_white"
+            aria-label="create new event button"
+          >
+            Create New Event
+          </button>
+          <table class="event_table" aria-live="assertive"></table>
+        </section>
+        <section class="new_form_container" aria-live="assertive" hidden>
+          <form class="new_event_form" id="reset_anchor">
+            <h2 class="form_heading">Create New Event</h2>
+            <fieldset>
+              <legend>Contact Information</legend>
+              <label for="contact_firstName" class=""
+                ><span>First Name</span>
+                <input type="text" id="contact_firstName" class="" required />
+              </label>
+              <label for="contact_lastName" class=""
+                ><span>Last Name</span>
+                <input type="text" id="contact_lastName" class="" required />
+              </label>
+              <label for="contact_email" class=""
+                ><span>Email</span>
+                <input type="email" id="contact_email" class="" />
+              </label>
+              <label for="contact_phone" class=""
+                ><span>Phone</span>
+                <input type="text" id="contact_phone" class="" />
+              </label>
+            </fieldset>
+            <fieldset>
+              <legend>Event Date and Time</legend>
+              <label for="event_date"
+                ><span>Date</span>
+                <input type="date" id="event_date" class="" required />
+              </label>
+              <label for="event_time"
+                ><span>Time</span>
+                <input type="time" id="event_time" />
+              </label>
+            </fieldset>
+            <fieldset class="food_order_input">
+              <legend>Food Order</legend>
+              <div class="food_input_group">
+                <label for="food_type" class=""
+                  ><span>Item</span>
+                  <input type="text" class="food_type" name="type" required />
+                </label>
+                <label for="food_cost"
+                  ><span>Item Cost</span>
+                  <input
+                    type="number"
+                    class="food_cost"
+                    name="pricePerOrder"
+                    required
+                  />
+                </label>
+                <label for="food_quantity"
+                  ><span>Quantity</span>
+                  <input
+                    type="number"
+                    class="food_quantity"
+                    name="quantity"
+                    required
+                  />
+                </label>
+              </div>
+              <div class="dynamic_food_inputs" aria-label="assertive"></div>
+            </fieldset>
+            <button class="add_food_button green font_white">Add Food</button>
+            <fieldset class="bev_order_input">
+              <legend>Beverage Order</legend>
+              <div class="bev_input_group">
+                <label for="bev_type" class=""
+                  ><span>Item</span>
+                  <input type="text" class="bev_type" name="type" required />
+                </label>
+                <label for="bev_cost"
+                  ><span>Item Cost</span>
+                  <input
+                    type="number"
+                    class="bev_cost"
+                    name="pricePerOrder"
+                    required
+                  />
+                </label>
+                <label for="bev_quantity"
+                  ><span>Quantity</span>
+                  <input
+                    type="number"
+                    class="bev_quantity"
+                    name="quantity"
+                    required
+                  />
+                </label>
+              </div>
+              <div class="dynamic_bev_inputs" aria-live="assertive"></div>
+            </fieldset>
+            <button class="add_bev_button green font_white">
+              Add Beverage
+            </button>
+            <fieldset>
+              <legend>Room and Equipment Rental</legend>
+              <label for="event_rental_price"
+                ><span>Rental Price</span>
+                <input type="number" id="event_rental_price" required />
+              </label>
+            </fieldset>
+            <div class="new_form_container_buttons">
+              <button type="submit" class="post_form_button green font_white">
+                Create
+              </button>
+              <button class="cancel_post_button font_white">Cancel</button>
             </div>
-        </header>
-        <main class="events_display">
-            <section class="events_list" aria-live="assertive">
-                <button class="js_create_event_button create_button green font_white" aria-label="create new event button">Create New Event</button>
-                <table class="event_table" aria-live="assertive">
-                </table>
-            </section>
-            <section class="new_form_container" aria-live="assertive" hidden>
-                <form class="new_event_form" id="reset_anchor">
-                    <h2 class="form_heading">Create New Event</h2>
-                    <fieldset>
-                        <legend>Contact Information</legend>
-                        <label for="contact_firstName" class=""><span>First Name</span>
-                            <input type="text" id="contact_firstName" class="" required>
-                        </label>
-                        <label for="contact_lastName" class=""><span>Last Name</span>
-                            <input type="text" id="contact_lastName" class="" required>
-                        </label>
-                        <label for="contact_email" class=""><span>Email</span>
-                            <input type="email" id="contact_email" class="">
-                        </label>
-                        <label for="contact_phone" class=""><span>Phone</span>
-                            <input type="text" id="contact_phone" class="">
-                        </label>
-                    </fieldset>
-                    <fieldset>
-                        <legend>Event Date and Time</legend>
-                        <label for="event_date"><span>Date</span>
-                            <input type="date" id="event_date" class="" required>
-                        </label>
-                        <label for="event_time"><span>Time</span>
-                            <input type="time" id="event_time">
-                        </label>
-                    </fieldset>
-                    <fieldset class="food_order_input">
-                        <legend>Food Order</legend>
-                        <div class="food_input_group">
-                            <label for="food_type" class=""><span>Item</span>
-                                <input type="text" class="food_type" name="type" required>
-                            </label>
-                            <label for="food_cost"><span>Item Cost</span>
-                                <input type="number" class="food_cost" name="pricePerOrder" required>
-                            </label>
-                            <label for="food_quantity"><span>Quantity</span>
-                                <input type="number" class="food_quantity" name="quantity" required>
-                            </label>
-                        </div>
-                        <div class="dynamic_food_inputs" aria-label="assertive"></div>
-                    </fieldset>
-                    <button class="add_food_button green font_white">Add Food</button>
-                    <fieldset class="bev_order_input">
-                            <legend>Beverage Order</legend>
-                            <div class="bev_input_group">
-                                <label for="bev_type" class=""><span>Item</span>
-                                    <input type="text" class="bev_type" name="type" required>
-                                </label>
-                                <label for="bev_cost"><span>Item Cost</span>
-                                    <input type="number" class="bev_cost" name="pricePerOrder" required>
-                                </label>
-                                <label for="bev_quantity"><span>Quantity</span>
-                                    <input type="number" class="bev_quantity" name="quantity" required>
-                                </label>
-                            </div>
-                            <div class="dynamic_bev_inputs" aria-live="assertive"></div>
-                    </fieldset>
-                    <button class="add_bev_button green font_white">Add Beverage</button>
-                    <fieldset>
-                        <legend>Room and Equipment Rental</legend>
-                        <label for="event_rental_price"><span>Rental Price</span>
-                            <input type="number" id="event_rental_price" required>
-                        </label>
-                    </fieldset>
-                    <div class="new_form_container_buttons">
-                        <button type="submit" class="post_form_button green font_white">Create</button>
-                        <button class="cancel_post_button font_white">Cancel</button>
-                    </div>  
-                </form>
-            </section>
-        </main>
-        <div class="event_report" aria-live="assertive" hidden></div>
-        <div class="update_form" aria-live="assertive" hidden></div>
+          </form>
+        </section>
+      </main>
+      <div class="event_report" aria-live="assertive" hidden></div>
+      <div class="update_form" aria-live="assertive" hidden></div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="app.js"></script>
     <script src="main.js"></script>
-</body>
+  </body>
 </html>

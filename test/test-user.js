@@ -59,12 +59,10 @@ describe("/api/users", function() {
 
   describe("GET req", function() {
     it("should return all users", function() {
-      let res;
       return chai
         .request(app)
         .get("/api/users")
-        .then(_res => {
-          res = _res;
+        .then(res => {
           expect(res).to.have.status(200);
         });
     });

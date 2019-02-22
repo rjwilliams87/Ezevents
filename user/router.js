@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 
-const { User } = "./models";
+const { User } = require("./models");
 const { localStrategy, jwtStrategy } = require("../auth");
 
 const router = express.Router();

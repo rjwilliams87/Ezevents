@@ -49,6 +49,12 @@ body {
   visibility: hidden;
 }
 
+.login_form,
+.signup_form {
+  max-width: 90vw;
+  margin: 0 auto;
+}
+
 .login_fields {
   display: flex;
   background-color: white;
@@ -116,12 +122,16 @@ body {
   display: block;
   text-align: center;
   margin-top: 3vh;
-  color: white;
+  /* color: white; */
+  font-size: 14px;
+  padding: 5px;
 }
 
-.register_path,
-.login_path {
+.demo-login__p {
   color: white;
+  text-align: center;
+  padding: 5px;
+  font-size: 16px;
 }
 
 .singup_fields {
@@ -220,7 +230,7 @@ body {
 
   .singup_fields {
     position: relative;
-    bottom: 15px;
+    bottom: 30px;
     width: 400px;
     height: 500px;
     margin-top: 20px;

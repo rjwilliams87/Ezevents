@@ -12,6 +12,8 @@ body {
   background-position: center;
   /* background-repeat: no-repeat; */
   overflow-x: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 .main_header {
@@ -21,8 +23,8 @@ body {
 }
 
 .landing_container {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 .icons_container {

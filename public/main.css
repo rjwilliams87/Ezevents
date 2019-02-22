@@ -10,8 +10,8 @@ body {
     url(CSS_Images/restaurant-3597677_1920.jpg);
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  overflow: hidden;
+  /* background-repeat: no-repeat; */
+  overflow-x: hidden;
 }
 
 .main_header {
